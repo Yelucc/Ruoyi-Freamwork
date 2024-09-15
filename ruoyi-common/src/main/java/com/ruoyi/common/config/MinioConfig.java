@@ -1,4 +1,4 @@
-package com.ruoyi.framework.config;
+package com.ruoyi.common.config;
 
 import io.minio.MinioClient;
 import org.springframework.boot.context.properties.ConfigurationProperties;

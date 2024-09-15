@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysUrlMapMapper">
+    
+    <resultMap type="SysUrlMap" id="BaseResultMap">
+        <result property="shortUrl"    column="short_url"    />
+        <result property="longUrl"    column="long_url"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="expiresTime"    column="expires_time"    />
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+ short_url, long_url, create_time, expires_time    </sql>
+
+
+</mapper>

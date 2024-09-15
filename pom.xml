@@ -198,7 +198,7 @@
         <module>ruoyi-quartz</module>
         <module>ruoyi-generator</module>
         <module>ruoyi-common</module>
-        <module>KuiHua</module>
+        <module>kuihua</module>
     </modules>
     <packaging>pom</packaging>
 

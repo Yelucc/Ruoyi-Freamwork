@@ -2,6 +2,8 @@ package com.ruoyi.kuihua.service;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+
+import com.ruoyi.kuihua.domain.KhLeaderBoardVo;
 import com.ruoyi.kuihua.domain.KhScoreRecord;
 import com.baomidou.mybatisplus.extension.service.IService;
 /**
@@ -16,4 +18,5 @@ public interface KhScoreRecordService extends IService<KhScoreRecord>
      * (移动端) 提交种草记录
      */
     Boolean submitShareRecord(KhScoreRecord shareRecord) throws NoSuchAlgorithmException;
+
 }

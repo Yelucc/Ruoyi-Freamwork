@@ -2,9 +2,15 @@ package com.ruoyi.kuihua.controller;
 
 import java.util.Arrays;
 import java.util.List;
+
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.annotation.Anonymous;
+import com.ruoyi.common.core.domain.model.RegisterBody;
+import com.ruoyi.common.utils.StringUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,18 +38,24 @@ import com.ruoyi.common.core.page.TableDataInfo;
  */
 @RestController
 @RequestMapping("/KuiHua/khuser")
-public class KhUserController extends BaseController
-{
+public class KhUserController extends BaseController {
     @Autowired
     private KhUserService khUserService;
+
+
+    @Anonymous
+    @PostMapping("/register/{teamCode}")
+    public AjaxResult register(@RequestBody RegisterBody user, @PathVariable("teamCode") String teamCode) {
+        String msg = khUserService.register(user, teamCode);
+        return StringUtils.isEmpty(msg) ? success() : error(msg);
+    }
 
     /**
      * 查询用户管理列表
      */
     @PreAuthorize("@ss.hasPermi('KuiHua:khuser:list')")
     @GetMapping("/list")
-    public TableDataInfo list(KhUser khUser)
-    {
+    public TableDataInfo list(KhUser khUser) {
         Page<KhUser> list = khUserService.page(getPage(), Wrappers.lambdaQuery(khUser));
         return getDataTable(list);
     }
@@ -54,8 +66,7 @@ public class KhUserController extends BaseController
     @PreAuthorize("@ss.hasPermi('KuiHua:khuser:export')")
     @Log(title = "用户管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, KhUser khUser)
-    {
+    public void export(HttpServletResponse response, KhUser khUser) {
         List<KhUser> list = khUserService.list(Wrappers.lambdaQuery(khUser));
         ExcelUtil<KhUser> util = new ExcelUtil<KhUser>(KhUser.class);
         util.exportExcel(response, list, "用户管理数据");
@@ -66,8 +77,7 @@ public class KhUserController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('KuiHua:khuser:query')")
     @GetMapping(value = "/{userId}")
-    public AjaxResult getInfo(@PathVariable("userId") Long userId)
-    {
+    public AjaxResult getInfo(@PathVariable("userId") Long userId) {
         return success(khUserService.getById(userId));
     }
 
@@ -77,8 +87,7 @@ public class KhUserController extends BaseController
     @PreAuthorize("@ss.hasPermi('KuiHua:khuser:add')")
     @Log(title = "用户管理", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody KhUser khUser)
-    {
+    public AjaxResult add(@RequestBody KhUser khUser) {
         return toAjax(khUserService.save(khUser));
     }
 
@@ -88,8 +97,7 @@ public class KhUserController extends BaseController
     @PreAuthorize("@ss.hasPermi('KuiHua:khuser:edit')")
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody KhUser khUser)
-    {
+    public AjaxResult edit(@RequestBody KhUser khUser) {
         return toAjax(khUserService.updateById(khUser));
     }
 
@@ -98,9 +106,8 @@ public class KhUserController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('KuiHua:khuser:remove')")
     @Log(title = "用户管理", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{userIds}")
-    public AjaxResult remove(@PathVariable Long[] userIds)
-    {
+    @DeleteMapping("/{userIds}")
+    public AjaxResult remove(@PathVariable Long[] userIds) {
         return toAjax(khUserService.removeBatchByIds(Arrays.asList(userIds)));
     }
 }

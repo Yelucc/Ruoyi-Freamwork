@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -18,9 +19,10 @@ import java.io.Serializable;
  * @author ruoyi
  * @date 2024-09-15
  */
+@EqualsAndHashCode(callSuper = true)
 @TableName(value ="kh_score_record")
 @Data
-public class KhScoreRecord implements Serializable
+public class KhScoreRecord extends BaseEntity implements Serializable
 {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

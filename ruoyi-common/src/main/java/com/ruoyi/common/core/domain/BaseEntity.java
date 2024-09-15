@@ -49,4 +49,12 @@ public class BaseEntity implements Serializable {
     /* 请求参数 */
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private Map<String, Object> params;
+
+
+    public Map<String, Object> getParams() {
+        if (params == null) {
+            params = new HashMap<>();
+        }
+        return params;
+    }
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.kuihua.mapper.KhTeamMapper">
+    
+    <resultMap type="KhTeam" id="BaseResultMap">
+        <result property="teamId"    column="team_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="teamName"    column="team_name"    />
+        <result property="teamCode"    column="team_code"    />
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+ team_id, dept_id, team_name, team_code    </sql>
+
+
+</mapper>

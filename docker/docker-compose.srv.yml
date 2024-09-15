@@ -1,0 +1,42 @@
+networks:
+  env_default:
+    external: true
+services:
+  loya-nginx:
+    container_name: loya-nginx
+    restart: unless-stopped
+    image: nginx
+    networks:
+      - env_default
+    build:
+      context: .
+      dockerfile: nginx-dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./html/dist:/home/loya/projects/loya-ui
+      - ./conf/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/logs:/var/log/nginx
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - loya-server
+    links:
+      - loya-server
+      - common-minio
+  loya-server:
+    container_name: loya-server
+    restart: unless-stopped
+    networks:
+      - env_default
+    build:
+      context: .
+      dockerfile: loya-dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./loya/logs:/home/loya/logs
+      - ./loya/uploadPath:/home/loya/uploadPath
+    links:
+      - common-mysql
+      - common-minio
+      - common-redis

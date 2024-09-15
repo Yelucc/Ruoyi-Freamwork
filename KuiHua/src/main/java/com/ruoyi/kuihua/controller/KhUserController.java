@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ruoyi.common.annotation.Anonymous;
 import com.ruoyi.common.core.domain.model.RegisterBody;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.kuihua.domain.KhRegisterBody;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,9 +45,9 @@ public class KhUserController extends BaseController {
 
 
     @Anonymous
-    @PostMapping("/register/{teamCode}")
-    public AjaxResult register(@RequestBody RegisterBody user, @PathVariable("teamCode") String teamCode) {
-        String msg = khUserService.register(user, teamCode);
+    @PostMapping("/register")
+    public AjaxResult register(@RequestBody KhRegisterBody user) {
+        String msg = khUserService.register(user);
         return StringUtils.isEmpty(msg) ? success() : error(msg);
     }
 

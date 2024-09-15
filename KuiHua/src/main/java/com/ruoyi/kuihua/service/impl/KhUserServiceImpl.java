@@ -5,7 +5,6 @@ import com.ruoyi.common.constant.CacheConstants;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.domain.entity.SysUser;
-import com.ruoyi.common.core.domain.model.RegisterBody;
 import com.ruoyi.common.core.redis.RedisCache;
 import com.ruoyi.common.exception.user.CaptchaException;
 import com.ruoyi.common.exception.user.CaptchaExpireException;
@@ -14,6 +13,7 @@ import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.manager.AsyncManager;
 import com.ruoyi.framework.manager.factory.AsyncFactory;
+import com.ruoyi.kuihua.domain.KhRegisterBody;
 import com.ruoyi.kuihua.domain.KhTeam;
 import com.ruoyi.kuihua.service.KhTeamService;
 import com.ruoyi.system.service.ISysConfigService;
@@ -24,8 +24,6 @@ import com.ruoyi.kuihua.mapper.KhUserMapper;
 import com.ruoyi.kuihua.domain.KhUser;
 import com.ruoyi.kuihua.service.KhUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-
-import java.util.ArrayList;
 
 /**
  * 用户管理Service业务层处理
@@ -49,16 +47,19 @@ public class KhUserServiceImpl extends ServiceImpl<KhUserMapper, KhUser>
     @Autowired
     private KhTeamService teamService;
 
+    @Autowired
+    private KhUserService khUserService;
+
     /**
      * 注册
      */
     @Override
-    public String register(RegisterBody registerBody, String teamCode) {
+    public String register(KhRegisterBody registerBody) {
         String msg = "", username = registerBody.getUsername(), password = registerBody.getPassword();
         SysUser sysUser = new SysUser();
         sysUser.setUserName(username);
 
-        KhTeam khTeam = teamService.getOne(Wrappers.lambdaQuery(KhTeam.class).eq(KhTeam::getTeamCode, teamCode));
+        KhTeam khTeam = teamService.getOne(Wrappers.lambdaQuery(KhTeam.class).eq(KhTeam::getTeamCode, registerBody.getTeamCode()));
         if (khTeam == null) {
             msg = "团队不存在";
             return msg;
@@ -91,6 +92,15 @@ public class KhUserServiceImpl extends ServiceImpl<KhUserMapper, KhUser>
             sysUser.setRoleIds(new Long[]{101L});
 
             userService.updateUser(sysUser);
+
+            KhUser khUser = new KhUser();
+            khUser.setSysUserId(sysUser.getUserId());
+            khUser.setNickName(sysUser.getNickName());
+            khUser.setTeamId(khTeam.getTeamId());
+            khUser.setPhone(registerBody.getPhone());
+            khUser.setWechatNumber(registerBody.getWechatNumber());
+            khUserService.save(khUser);
+
             if (!regFlag) {
                 msg = "注册失败,请联系系统管理人员";
             } else {

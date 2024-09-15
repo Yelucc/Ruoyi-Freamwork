@@ -14,8 +14,8 @@ import java.io.Serializable;
 public class KhLeaderBoardVo implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String teamId;
+    private Long teamId;
     private String teamName;
     private Long score;
-    private String sortIndex;
+    private Long sortIndex;
 }

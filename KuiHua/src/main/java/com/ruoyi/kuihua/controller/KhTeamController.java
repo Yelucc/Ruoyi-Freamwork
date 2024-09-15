@@ -2,9 +2,13 @@ package com.ruoyi.kuihua.controller;
 
 import java.util.Arrays;
 import java.util.List;
+
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.common.annotation.Anonymous;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,8 +36,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  */
 @RestController
 @RequestMapping("/KuiHua/team")
-public class KhTeamController extends BaseController
-{
+public class KhTeamController extends BaseController {
     @Autowired
     private KhTeamService khTeamService;
 
@@ -42,10 +45,18 @@ public class KhTeamController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('KuiHua:team:list')")
     @GetMapping("/list")
-    public TableDataInfo list(KhTeam khTeam)
-    {
+    public TableDataInfo list(KhTeam khTeam) {
         Page<KhTeam> list = khTeamService.page(getPage(), Wrappers.lambdaQuery(khTeam));
         return getDataTable(list);
+    }
+
+    /**
+     * 查询团队排行榜
+     */
+    @Anonymous
+    @GetMapping("/leaderboard")
+    public TableDataInfo getLeaderBoard() {
+        return getDataTable(khTeamService.getLeaderBoardVoList());
     }
 
     /**
@@ -54,8 +65,7 @@ public class KhTeamController extends BaseController
     @PreAuthorize("@ss.hasPermi('KuiHua:team:export')")
     @Log(title = "团队管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, KhTeam khTeam)
-    {
+    public void export(HttpServletResponse response, KhTeam khTeam) {
         List<KhTeam> list = khTeamService.list(Wrappers.lambdaQuery(khTeam));
         ExcelUtil<KhTeam> util = new ExcelUtil<KhTeam>(KhTeam.class);
         util.exportExcel(response, list, "团队管理数据");
@@ -66,8 +76,7 @@ public class KhTeamController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('KuiHua:team:query')")
     @GetMapping(value = "/{teamId}")
-    public AjaxResult getInfo(@PathVariable("teamId") Long teamId)
-    {
+    public AjaxResult getInfo(@PathVariable("teamId") Long teamId) {
         return success(khTeamService.getById(teamId));
     }
 
@@ -77,8 +86,7 @@ public class KhTeamController extends BaseController
     @PreAuthorize("@ss.hasPermi('KuiHua:team:add')")
     @Log(title = "团队管理", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody KhTeam khTeam)
-    {
+    public AjaxResult add(@RequestBody KhTeam khTeam) {
         return toAjax(khTeamService.save(khTeam));
     }
 
@@ -88,8 +96,7 @@ public class KhTeamController extends BaseController
     @PreAuthorize("@ss.hasPermi('KuiHua:team:edit')")
     @Log(title = "团队管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody KhTeam khTeam)
-    {
+    public AjaxResult edit(@RequestBody KhTeam khTeam) {
         return toAjax(khTeamService.updateById(khTeam));
     }
 
@@ -98,9 +105,8 @@ public class KhTeamController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('KuiHua:team:remove')")
     @Log(title = "团队管理", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{teamIds}")
-    public AjaxResult remove(@PathVariable Long[] teamIds)
-    {
+    @DeleteMapping("/{teamIds}")
+    public AjaxResult remove(@PathVariable Long[] teamIds) {
         return toAjax(khTeamService.removeBatchByIds(Arrays.asList(teamIds)));
     }
 }

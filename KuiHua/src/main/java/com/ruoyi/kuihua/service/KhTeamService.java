@@ -1,6 +1,8 @@
 package com.ruoyi.kuihua.service;
 
 import java.util.List;
+
+import com.ruoyi.kuihua.domain.KhLeaderBoardVo;
 import com.ruoyi.kuihua.domain.KhTeam;
 import com.baomidou.mybatisplus.extension.service.IService;
 /**
@@ -11,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface KhTeamService extends IService<KhTeam>
 {
+    List<KhLeaderBoardVo> getLeaderBoardVoList();
 }

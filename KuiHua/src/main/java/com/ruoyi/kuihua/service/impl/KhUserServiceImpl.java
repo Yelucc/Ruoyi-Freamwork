@@ -5,25 +5,40 @@ import com.ruoyi.common.constant.CacheConstants;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.common.core.domain.model.LoginBody;
+import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.core.redis.RedisCache;
+import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.exception.user.CaptchaException;
 import com.ruoyi.common.exception.user.CaptchaExpireException;
+import com.ruoyi.common.exception.user.UserPasswordNotMatchException;
+import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.MessageUtils;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.utils.ip.IpUtils;
 import com.ruoyi.framework.manager.AsyncManager;
 import com.ruoyi.framework.manager.factory.AsyncFactory;
+import com.ruoyi.framework.security.context.AuthenticationContextHolder;
+import com.ruoyi.framework.web.service.SysLoginService;
+import com.ruoyi.framework.web.service.TokenService;
 import com.ruoyi.kuihua.domain.KhRegisterBody;
 import com.ruoyi.kuihua.domain.KhTeam;
 import com.ruoyi.kuihua.service.KhTeamService;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import com.ruoyi.kuihua.mapper.KhUserMapper;
 import com.ruoyi.kuihua.domain.KhUser;
 import com.ruoyi.kuihua.service.KhUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+
+import javax.annotation.Resource;
 
 /**
  * 用户管理Service业务层处理
@@ -34,10 +49,15 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 @Service
 public class KhUserServiceImpl extends ServiceImpl<KhUserMapper, KhUser>
         implements KhUserService {
+    @Autowired
+    private TokenService tokenService;
 
+    @Resource
+    private AuthenticationManager authenticationManager;
     @Autowired
     private ISysUserService userService;
-
+    @Autowired
+    private SysLoginService loginService;
     @Autowired
     private ISysConfigService configService;
 
@@ -50,19 +70,28 @@ public class KhUserServiceImpl extends ServiceImpl<KhUserMapper, KhUser>
     @Autowired
     private KhUserService khUserService;
 
+    @Override
+    public String Login(LoginBody body) {
+        KhUser khUser = getOne(Wrappers.lambdaQuery(KhUser.class)
+                .eq(KhUser::getPhone, body.getUsername())
+                .or()
+                .eq(KhUser::getWechatNumber, body.getUsername()));
+        return loginService.login(khUser.getPhone(),body.getPassword(),body.getCode(),body.getUuid());
+    }
+
     /**
      * 注册
      */
     @Override
     public String register(KhRegisterBody registerBody) {
-        String msg = "", username = registerBody.getUsername(), password = registerBody.getPassword();
+        String msg = "", username = registerBody.getPhone(), password = registerBody.getPassword();
         SysUser sysUser = new SysUser();
         sysUser.setUserName(username);
 
         KhTeam khTeam = teamService.getOne(Wrappers.lambdaQuery(KhTeam.class).eq(KhTeam::getTeamCode, registerBody.getTeamCode()));
         if (khTeam == null) {
             msg = "团队不存在";
-            return msg;
+            throw new RuntimeException(msg);
         }
 
         // 验证码开关
@@ -95,7 +124,7 @@ public class KhUserServiceImpl extends ServiceImpl<KhUserMapper, KhUser>
 
             KhUser khUser = new KhUser();
             khUser.setSysUserId(sysUser.getUserId());
-            khUser.setNickName(sysUser.getNickName());
+            khUser.setNickName(registerBody.getPhone());
             khUser.setTeamId(khTeam.getTeamId());
             khUser.setPhone(registerBody.getPhone());
             khUser.setWechatNumber(registerBody.getWechatNumber());
@@ -104,13 +133,56 @@ public class KhUserServiceImpl extends ServiceImpl<KhUserMapper, KhUser>
             if (!regFlag) {
                 msg = "注册失败,请联系系统管理人员";
             } else {
+                // 用户验证
+                Authentication authentication = null;
+                try
+                {
+                    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
+                    AuthenticationContextHolder.setContext(authenticationToken);
+                    // 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
+                    authentication = authenticationManager.authenticate(authenticationToken);
+                }
+                catch (Exception e)
+                {
+                    if (e instanceof BadCredentialsException)
+                    {
+                        AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.password.not.match")));
+                        throw new UserPasswordNotMatchException();
+                    }
+                    else
+                    {
+                        AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, e.getMessage()));
+                        throw new ServiceException(e.getMessage());
+                    }
+                }
+                finally
+                {
+                    AuthenticationContextHolder.clearContext();
+                }
+                AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success")));
+                LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+                recordLoginInfo(loginUser.getUserId());
                 AsyncManager.me().execute(AsyncFactory.recordLogininfor(username,
                         Constants.REGISTER, MessageUtils.message("user.register.success")));
+                // 生成token
+                return tokenService.createToken(loginUser);
             }
         }
-        return msg;
+        throw new RuntimeException(msg);
     }
-
+    /**
+     * 记录登录信息
+     *
+     * @param userId 用户ID
+     */
+    public void recordLoginInfo(Long userId)
+    {
+        SysUser sysUser = new SysUser();
+        sysUser.setUserId(userId);
+        sysUser.setLoginIp(IpUtils.getIpAddr());
+        sysUser.setLoginDate(DateUtils.getNowDate());
+        userService.updateUserProfile(sysUser);
+    }
     /**
      * 校验验证码
      *

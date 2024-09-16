@@ -9,6 +9,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ruoyi.common.annotation.Anonymous;
+import com.ruoyi.common.constant.Constants;
+import com.ruoyi.common.core.domain.model.LoginBody;
 import com.ruoyi.common.core.domain.model.RegisterBody;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.kuihua.domain.KhRegisterBody;
@@ -43,12 +45,29 @@ public class KhUserController extends BaseController {
     @Autowired
     private KhUserService khUserService;
 
+    /**
+     * 登录方法
+     *
+     * @param loginBody 登录信息
+     * @return 结果
+     */
+    @Anonymous
+    @PostMapping("/login")
+    public AjaxResult login(@RequestBody LoginBody loginBody) {
+        AjaxResult ajax = AjaxResult.success();
+        // 生成令牌
+        String token = khUserService.Login(loginBody);
+        ajax.put(Constants.TOKEN, token);
+        return ajax;
+    }
 
     @Anonymous
     @PostMapping("/register")
     public AjaxResult register(@RequestBody KhRegisterBody user) {
-        String msg = khUserService.register(user);
-        return StringUtils.isEmpty(msg) ? success() : error(msg);
+        AjaxResult ajax = AjaxResult.success();
+        String token = khUserService.register(user);
+        ajax.put(Constants.TOKEN, token);
+        return ajax;
     }
 
     /**

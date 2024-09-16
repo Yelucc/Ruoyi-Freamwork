@@ -2,6 +2,7 @@ package com.ruoyi.kuihua.service;
 
 import java.util.List;
 
+import com.ruoyi.common.core.domain.model.LoginBody;
 import com.ruoyi.common.core.domain.model.RegisterBody;
 import com.ruoyi.kuihua.domain.KhRegisterBody;
 import com.ruoyi.kuihua.domain.KhUser;
@@ -14,5 +15,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @date 2024-09-15
  */
 public interface KhUserService extends IService<KhUser> {
+    String Login(LoginBody body);
+
     String register(KhRegisterBody registerBody);
 }

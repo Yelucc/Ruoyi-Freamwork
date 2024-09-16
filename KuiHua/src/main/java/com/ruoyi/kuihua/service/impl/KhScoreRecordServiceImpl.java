@@ -1,13 +1,12 @@
 package com.ruoyi.kuihua.service.impl;
 
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.stream.Collectors;
+import java.util.Arrays;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.ruoyi.common.utils.SecurityUtils;
-import com.ruoyi.kuihua.domain.KhLeaderBoardVo;
+import com.ruoyi.common.utils.file.FileUploadUtils;
 import com.ruoyi.kuihua.domain.KhTeam;
 import com.ruoyi.kuihua.domain.KhUser;
 import com.ruoyi.kuihua.service.KhTeamService;
@@ -20,6 +19,7 @@ import com.ruoyi.kuihua.domain.KhScoreRecord;
 import com.ruoyi.kuihua.service.KhScoreRecordService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 葵花分数记录Service业务层处理
@@ -45,12 +45,32 @@ public class KhScoreRecordServiceImpl extends ServiceImpl<KhScoreRecordMapper, K
      */
     @Transactional
     @Override
-    public Boolean submitShareRecord(KhScoreRecord shareRecord) throws NoSuchAlgorithmException {
+    public Boolean submitShareRecord(String sharedLink, MultipartFile[] sharedPicture) throws NoSuchAlgorithmException, IOException {
         long count = count(Wrappers.lambdaQuery(KhScoreRecord.class)
                 .eq(KhScoreRecord::getUserId, SecurityUtils.getLoginUser().getUserId())
                 .eq(KhScoreRecord::getStatus, "Normal")
         );
-        shareRecord.setUserId(SecurityUtils.getLoginUser().getUserId());
+        KhScoreRecord shareRecord = new KhScoreRecord();
+
+        KhUser khUser = khUserService.getOne(Wrappers.lambdaQuery(KhUser.class)
+                .eq(KhUser::getSysUserId, SecurityUtils.getLoginUser().getUserId()));
+        KhTeam khTeam = khTeamService.getOne(Wrappers.lambdaQuery(KhTeam.class)
+                .eq(KhTeam::getTeamId, khUser.getTeamId()));
+
+        shareRecord.setUserId(khUser.getUserId());
+        shareRecord.setTeamId(khTeam.getTeamId());
+        shareRecord.setTeamName(khTeam.getTeamName());
+        shareRecord.setSharedLink(sharedLink);
+        String[] imgs = new String[sharedPicture.length];
+        for (int i = 0, sharedPictureLength = sharedPicture.length; i < sharedPictureLength; i++) {
+            MultipartFile multipartFile = sharedPicture[i];
+            try {
+                imgs[i] = FileUploadUtils.uploadMinio(multipartFile);
+            } catch (IOException e) {
+                throw e;
+            }
+        }
+        shareRecord.setSharedPicture(imgs);
         if (count == 0) {
             shareRecord.setScore(3L);
         } else if (count == 1) {
@@ -59,10 +79,7 @@ public class KhScoreRecordServiceImpl extends ServiceImpl<KhScoreRecordMapper, K
             shareRecord.setScore(1L);
         }
 
-        KhUser khUser = khUserService.getOne(Wrappers.lambdaQuery(KhUser.class)
-                .eq(KhUser::getSysUserId, SecurityUtils.getLoginUser().getUserId()));
-        KhTeam khTeam = khTeamService.getOne(Wrappers.lambdaQuery(KhTeam.class)
-                .eq(KhTeam::getTeamId, khUser.getTeamId()));
+
         khTeam.addScore(shareRecord.getScore());
         khTeamService.updateById(khTeam);
 
@@ -71,8 +88,6 @@ public class KhScoreRecordServiceImpl extends ServiceImpl<KhScoreRecordMapper, K
 
         return save(shareRecord);
     }
-
-
 
 
 }

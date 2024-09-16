@@ -32,7 +32,8 @@ public class MinioUtil {
             minioClient.putObject(PutObjectArgs.builder().bucket(bucketName).object(fileName).stream(inputStream, multipartFile.getSize(), -1).contentType(multipartFile.getContentType()).build());
             url = minioClient.getPresignedObjectUrl(GetPresignedObjectUrlArgs.builder().bucket(bucketName).object(fileName).method(Method.GET).build());
             url = url.substring(0, url.indexOf('?'));
-            return ServletUtils.urlDecode(url);
+            return "/" +bucketName + "/" + fileName;
+//            return ServletUtils.urlDecode(url);
         } catch (Exception e) {
             throw new IOException(e.getMessage(), e);
         }

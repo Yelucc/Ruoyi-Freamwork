@@ -51,7 +51,7 @@ public class KhScoreRecord extends BaseEntity implements Serializable
 
     /** 种草图片 */
     @Excel(name = "种草图片")
-    private String sharedPicture;
+    private String[] sharedPicture;
 
 
 

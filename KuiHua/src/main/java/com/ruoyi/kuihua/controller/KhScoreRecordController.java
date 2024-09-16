@@ -93,7 +93,7 @@ public class KhScoreRecordController extends BaseController {
     @Log(title = "葵花分数记录", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody KhScoreRecord khScoreRecord) {
-        return toAjax(khScoreRecordService.updateById(khScoreRecord));
+        return toAjax(khScoreRecordService.changeRecordStatus(khScoreRecord));
     }
 
     /**

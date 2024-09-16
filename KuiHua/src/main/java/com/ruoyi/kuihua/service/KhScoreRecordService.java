@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface KhScoreRecordService extends IService<KhScoreRecord>
 {
+    Boolean changeRecordStatus(KhScoreRecord newRecord);
+
     /**
      * (移动端) 提交种草记录
      */

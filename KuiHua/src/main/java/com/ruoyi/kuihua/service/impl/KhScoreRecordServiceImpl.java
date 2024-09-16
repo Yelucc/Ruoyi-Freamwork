@@ -2,7 +2,7 @@ package com.ruoyi.kuihua.service.impl;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
+import java.util.Objects;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.ruoyi.common.utils.SecurityUtils;
@@ -38,22 +38,44 @@ public class KhScoreRecordServiceImpl extends ServiceImpl<KhScoreRecordMapper, K
     @Autowired
     private KhTeamService khTeamService;
 
+    @Transactional
+    @Override
+    public Boolean changeRecordStatus(KhScoreRecord newRecord) {
+        KhScoreRecord oldRecord = getById(newRecord.getRecordId());
+        if (Objects.equals(oldRecord.getStatus(), newRecord.getStatus())) {
+            return true;
+        }
+        if ("Invalid".equals(newRecord.getStatus())) {
+            KhTeam khTeam = khTeamService.getById(newRecord.getTeamId());
+            khTeam.setTeamAllScore(khTeam.getTeamAllScore() - oldRecord.getScore());
+            oldRecord.setStatus(newRecord.getStatus());
+
+            return khTeamService.updateById(khTeam) && updateById(oldRecord);
+        }
+        if ("Normal".equals(newRecord.getStatus())) {
+            KhTeam khTeam = khTeamService.getById(newRecord.getTeamId());
+            khTeam.setTeamAllScore(khTeam.getTeamAllScore() + oldRecord.getScore());
+            oldRecord.setStatus(newRecord.getStatus());
+            return khTeamService.updateById(khTeam) && updateById(oldRecord);
+        }
+        return false;
+    }
+
     /**
      * (移动端) 提交种草记录
-     *
-     * @param shareRecord
      */
     @Transactional
     @Override
     public Boolean submitShareRecord(String sharedLink, MultipartFile[] sharedPicture) throws NoSuchAlgorithmException, IOException {
+        KhUser khUser = khUserService.getOne(Wrappers.lambdaQuery(KhUser.class)
+                .eq(KhUser::getSysUserId, SecurityUtils.getLoginUser().getUserId()));
         long count = count(Wrappers.lambdaQuery(KhScoreRecord.class)
-                .eq(KhScoreRecord::getUserId, SecurityUtils.getLoginUser().getUserId())
+                .eq(KhScoreRecord::getUserId, khUser.getUserId())
                 .eq(KhScoreRecord::getStatus, "Normal")
         );
         KhScoreRecord shareRecord = new KhScoreRecord();
 
-        KhUser khUser = khUserService.getOne(Wrappers.lambdaQuery(KhUser.class)
-                .eq(KhUser::getSysUserId, SecurityUtils.getLoginUser().getUserId()));
+
         KhTeam khTeam = khTeamService.getOne(Wrappers.lambdaQuery(KhTeam.class)
                 .eq(KhTeam::getTeamId, khUser.getTeamId()));
 

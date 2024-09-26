@@ -75,10 +75,9 @@ public class KhScoreRecordServiceImpl extends ServiceImpl<KhScoreRecordMapper, K
         );
         KhScoreRecord shareRecord = new KhScoreRecord();
 
-
         KhTeam khTeam = khTeamService.getOne(Wrappers.lambdaQuery(KhTeam.class)
                 .eq(KhTeam::getTeamId, khUser.getTeamId()));
-
+        shareRecord.setNickName(khUser.getNickName());
         shareRecord.setUserId(khUser.getUserId());
         shareRecord.setTeamId(khTeam.getTeamId());
         shareRecord.setTeamName(khTeam.getTeamName());
@@ -105,8 +104,8 @@ public class KhScoreRecordServiceImpl extends ServiceImpl<KhScoreRecordMapper, K
         khTeam.addScore(shareRecord.getScore());
         khTeamService.updateById(khTeam);
 
-        String shortenUrl = urlMapService.shortenUrl(shareRecord.getSharedLink());
-        shareRecord.setSharedLink("/common/r/" + shortenUrl);
+//        String shortenUrl = urlMapService.shortenUrl(shareRecord.getSharedLink());
+//        shareRecord.setSharedLink("/common/r/" + shortenUrl);
 
         return save(shareRecord);
     }

@@ -25,4 +25,6 @@ public interface KhScoreRecordService extends IService<KhScoreRecord>
      */
     @Transactional
     Boolean submitShareRecord(String sharedLink, MultipartFile[] sharedPicture) throws NoSuchAlgorithmException, IOException;
+
+    String put2Cdp(String clientId, String clientSecret) throws Exception;
 }

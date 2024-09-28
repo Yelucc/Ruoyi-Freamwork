@@ -44,6 +44,14 @@ public class KhScoreRecordController extends BaseController {
         return success(khScoreRecordService.submitShareRecord(sharedLink, sharedPicture));
     }
 
+    /**
+     * 查询葵花分数记录列表
+     */
+    @PreAuthorize("@ss.hasPermi('KuiHua:scoreRecord:list')")
+    @GetMapping("/put2cdp/{clientId}/{clientSecret}")
+    public AjaxResult put2CDP(@PathVariable("clientId") String clientId, @PathVariable("clientSecret") String clientSecret) throws Exception {
+        return success(khScoreRecordService.put2Cdp(clientId, clientSecret));
+    }
 
     /**
      * 查询葵花分数记录列表

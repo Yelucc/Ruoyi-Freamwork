@@ -1,9 +1,16 @@
 package com.ruoyi.kuihua.service.impl;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Objects;
 
+import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.file.FileUploadUtils;
@@ -30,6 +37,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class KhScoreRecordServiceImpl extends ServiceImpl<KhScoreRecordMapper, KhScoreRecord>
         implements KhScoreRecordService {
+
+    private static final String TOKEN_URL = "https://cdp.xiaokuihua.net/api/mip-security/auth/mipApp/token/getToken";
+    private static final String DATA_URL = "https://cdp.xiaokuihua.net/api/mip-etl-sync/v2/api/receiveData";
 
     @Autowired
     private ISysUrlMapService urlMapService;
@@ -110,5 +120,67 @@ public class KhScoreRecordServiceImpl extends ServiceImpl<KhScoreRecordMapper, K
         return save(shareRecord);
     }
 
+
+    public String getToken(String clientId, String clientSecret) throws Exception {
+        URL url = new URL(TOKEN_URL);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("clientId", clientId);
+        conn.setRequestProperty("clientSecret", clientSecret);
+        conn.setDoOutput(true);
+
+        int responseCode = conn.getResponseCode();
+        if (responseCode == 200) {
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String inputLine;
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+            // 解析 JSON 获取 token
+            JSONObject jsonResponse = JSONObject.from(response.toString());
+            return jsonResponse.getString("data"); // 提取 token
+        } else {
+            throw new RuntimeException("Failed : HTTP error code : " + responseCode);
+        }
+    }
+
+    public String sendData(String appToken, String jsonData) throws Exception {
+        URL url = new URL(DATA_URL);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Authorization", appToken);
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setDoOutput(true);
+
+        try (OutputStream os = conn.getOutputStream()) {
+            os.write(jsonData.getBytes("UTF-8"));
+            os.flush();
+        }
+
+        int responseCode = conn.getResponseCode();
+        if (responseCode == 200) {
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String inputLine;
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+            return response.toString(); // 返回完整的响应内容
+        } else {
+            throw new RuntimeException("Failed : HTTP error code : " + responseCode);
+        }
+    }
+
+    @Override
+    public String put2Cdp(String clientId, String clientSecret) throws Exception {
+        List<KhScoreRecord> scoreRecords = list();
+        String token = getToken(clientId, clientSecret);
+        return sendData(token, JSONObject.toJSONString(scoreRecords));
+    }
 
 }

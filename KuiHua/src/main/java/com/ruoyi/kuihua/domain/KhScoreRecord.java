@@ -33,17 +33,17 @@ public class KhScoreRecord extends BaseEntity implements Serializable {
     /**
      * 用户ID
      */
-    @Excel(name = "用户ID")
+//    @Excel(name = "用户ID")
     private Long userId;
 
     /** 用户昵称 */
-    @Excel(name = "用户昵称")
+    @Excel(name = "用户手机号")
     private String nickName;
 
     /**
      * 团队ID
      */
-    @Excel(name = "团队ID")
+//    @Excel(name = "团队ID")
     private Long teamId;
 
     /**
@@ -73,7 +73,7 @@ public class KhScoreRecord extends BaseEntity implements Serializable {
     /**
      * 种草图片
      */
-    @Excel(name = "种草图片")
+//    @Excel(name = "种草图片")
     private String[] sharedPicture;
 
 

@@ -1,7 +1,7 @@
 version : '3'
 services:
   loya-mysql:
-    container_name: loya-mysql
+    container_name: app-mysql
     image: mysql:5.7
     restart: unless-stopped
     build:
@@ -25,7 +25,7 @@ services:
       MYSQL_DATABASE: 'loya'
       MYSQL_ROOT_PASSWORD: loya@2024
   loya-minio:
-    container_name: loya-minio
+    container_name: app-minio
     restart: unless-stopped
     image: minio/minio:latest
     ports:
@@ -38,7 +38,7 @@ services:
       - ./minio/data:/data  # 持久化存储
     command: server /data --console-address ":9001
   loya-redis:
-    container_name: loya-redis
+    container_name: app-redis
     image: redis:7-alpine
     restart: unless-stopped
     build:
@@ -50,8 +50,8 @@ services:
       - ./conf/redis.conf:/home/loya/redis/redis.conf
       - ./redis/data:/data
     command: redis-server /home/loya/redis/redis.conf
-  loya-nginx:
-    container_name: loya-nginx
+  app-nginx:
+    container_name: app-nginx
     image: nginx:latest
     restart: unless-stopped
     build:
@@ -65,25 +65,25 @@ services:
       - ./nginx/logs:/var/log/nginx
       - ./nginx/conf.d:/etc/nginx/conf.d
     depends_on:
-      - loya-server
+      - app-server
     links:
-      - loya-server
-      - loya-minio
-  loya-server:
-    container_name: loya-server
+      - app-server
+      - app-minio
+  app-server:
+    container_name: app-server
     restart: unless-stopped
     build:
       context: .
-      dockerfile: loya-dockerfile
+      dockerfile: app-dockerfile
     ports:
       - "8080:8080"
     volumes:
-      - ./loya/logs:/home/loya/logs
-      - ./loya/uploadPath:/home/loya/uploadPath
+      - ./app/logs:/home/app/logs
+      - ./app/uploadPath:/home/app/uploadPath
     depends_on:
-      - loya-mysql
-      - loya-redis
+      - app-mysql
+      - app-redis
     links:
-      - loya-mysql
-      - loya-minio
-      - loya-redis
+      - app-mysql
+      - app-minio
+      - app-redis

@@ -1,0 +1,16 @@
+# 基础镜像
+FROM openjdk:8-jre
+# author
+MAINTAINER ruoyi
+
+# 挂载目录
+VOLUME /home/app
+# 创建目录
+RUN mkdir -p /home/app
+# 指定路径
+WORKDIR /home/app
+# 复制jar文件到路径
+COPY ./jar/*.jar /home/app/app.jar
+COPY ./jar/*.yml /home/app/
+# 启动应用
+ENTRYPOINT ["java","-jar","app.jar"]

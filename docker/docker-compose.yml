@@ -1,6 +1,6 @@
-version : '3'
+
 services:
-  loya-mysql:
+  app-mysql:
     container_name: app-mysql
     image: mysql:5.7
     restart: unless-stopped
@@ -22,9 +22,9 @@ services:
           '--lower-case-table-names=1'
         ]
     environment:
-      MYSQL_DATABASE: 'loya'
-      MYSQL_ROOT_PASSWORD: loya@2024
-  loya-minio:
+      MYSQL_DATABASE: 'common'
+      MYSQL_ROOT_PASSWORD: 'app@2024'
+  app-minio:
     container_name: app-minio
     restart: unless-stopped
     image: minio/minio:latest
@@ -32,12 +32,12 @@ services:
       - "9000:9000"
       - "9001:9001"
     environment:
-      MINIO_ROOT_USER: "loya"
-      MINIO_ROOT_PASSWORD: "loya@2024"
+      MINIO_ROOT_USER: "app"
+      MINIO_ROOT_PASSWORD: "common@2024"
     volumes:
       - ./minio/data:/data  # 持久化存储
-    command: server /data --console-address ":9001
-  loya-redis:
+    command: server /data --console-address ":9001"
+  app-redis:
     container_name: app-redis
     image: redis:7-alpine
     restart: unless-stopped
@@ -47,9 +47,9 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - ./conf/redis.conf:/home/loya/redis/redis.conf
+      - ./conf/redis.conf:/home/app/redis/redis.conf
       - ./redis/data:/data
-    command: redis-server /home/loya/redis/redis.conf
+    command: redis-server /home/app/redis/redis.conf
   app-nginx:
     container_name: app-nginx
     image: nginx:latest
@@ -60,7 +60,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./html/dist:/home/loya/projects/loya-ui
+      - ./html/dist:/home/app/projects/app-ui
       - ./conf/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/logs:/var/log/nginx
       - ./nginx/conf.d:/etc/nginx/conf.d

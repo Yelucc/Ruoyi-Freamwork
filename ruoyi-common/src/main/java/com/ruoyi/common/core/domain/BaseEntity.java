@@ -35,11 +35,13 @@ public class BaseEntity implements Serializable {
     /* 创建时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
-    @TableField(fill = FieldFill.INSERT_UPDATE)
+
     /* 更新者 */
+    @TableField(fill = FieldFill.UPDATE)
     private String updateBy;
-    @TableField(fill = FieldFill.INSERT_UPDATE)
+
     /* 更新时间 */
+    @TableField(fill = FieldFill.UPDATE)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
     @TableField(exist = false)

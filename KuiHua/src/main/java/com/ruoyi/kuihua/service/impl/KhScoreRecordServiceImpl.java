@@ -13,6 +13,7 @@ import java.util.Objects;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.ruoyi.common.utils.SecurityUtils;
+import com.ruoyi.common.utils.file.FileOss;
 import com.ruoyi.common.utils.file.FileUploadUtils;
 import com.ruoyi.kuihua.domain.KhTeam;
 import com.ruoyi.kuihua.domain.KhUser;
@@ -99,7 +100,7 @@ public class KhScoreRecordServiceImpl extends ServiceImpl<KhScoreRecordMapper, K
         for (int i = 0, sharedPictureLength = sharedPicture.length; i < sharedPictureLength; i++) {
             MultipartFile multipartFile = sharedPicture[i];
             try {
-                imgs[i] = FileUploadUtils.uploadMinio(multipartFile);
+                imgs[i] = FileUploadUtils.upload(multipartFile, FileOss.MINIO);
             } catch (IOException e) {
                 throw e;
             }

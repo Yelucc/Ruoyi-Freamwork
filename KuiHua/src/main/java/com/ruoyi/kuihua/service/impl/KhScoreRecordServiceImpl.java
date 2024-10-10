@@ -19,6 +19,7 @@ import com.ruoyi.kuihua.domain.KhUser;
 import com.ruoyi.kuihua.service.KhTeamService;
 import com.ruoyi.kuihua.service.KhUserService;
 import com.ruoyi.system.service.ISysUrlMapService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.kuihua.mapper.KhScoreRecordMapper;
@@ -35,12 +36,14 @@ import org.springframework.web.multipart.MultipartFile;
  * @date 2024-09-15
  */
 @Service
+@Slf4j
 public class KhScoreRecordServiceImpl extends ServiceImpl<KhScoreRecordMapper, KhScoreRecord>
         implements KhScoreRecordService {
 
     private static final String TOKEN_URL = "https://cdp.xiaokuihua.net/api/mip-security/auth/mipApp/token/getToken";
     private static final String DATA_URL = "https://cdp.xiaokuihua.net/api/mip-etl-sync/v2/api/receiveData";
-
+    private static final int MAX_DATA_ITEMS = 1000; // 每次请求的最大条数
+    private static final long WAIT_TIME_MS = 2000; // 每次请求的等待时间（2秒）
     @Autowired
     private ISysUrlMapService urlMapService;
     @Autowired
@@ -178,9 +181,27 @@ public class KhScoreRecordServiceImpl extends ServiceImpl<KhScoreRecordMapper, K
 
     @Override
     public String put2Cdp(String clientId, String clientSecret) throws Exception {
+        // 获取评分记录
         List<KhScoreRecord> scoreRecords = list();
-        String token = getToken(clientId, clientSecret);
-        return sendData(token, JSONObject.toJSONString(scoreRecords));
+
+        // 将数据切片并发送
+        for (int i = 0; i < scoreRecords.size(); i += MAX_DATA_ITEMS) {
+            // 计算当前批次的结束索引
+            int end = Math.min(i + MAX_DATA_ITEMS, scoreRecords.size());
+            List<KhScoreRecord> batch = scoreRecords.subList(i, end);
+
+            // 获取 Token
+            String token = getToken(clientId, clientSecret);
+
+            // 发送数据并返回响应
+            String response = sendData(token, JSONObject.toJSONString(batch));
+            log.info("Response for batch {}: {}", i / MAX_DATA_ITEMS + 1, response);
+
+            // 等待 2 秒钟
+            Thread.sleep(WAIT_TIME_MS);
+        }
+
+        return "All batches sent successfully";
     }
 
 }

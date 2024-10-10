@@ -59,7 +59,8 @@ public class KhScoreRecordController extends BaseController {
     @PreAuthorize("@ss.hasPermi('KuiHua:scoreRecord:list')")
     @GetMapping("/list")
     public TableDataInfo list(KhScoreRecord khScoreRecord) {
-        Page<KhScoreRecord> list = khScoreRecordService.page(getPage(), Wrappers.lambdaQuery(khScoreRecord));
+        Page<KhScoreRecord> list = khScoreRecordService.page(getPage(), Wrappers.lambdaQuery(khScoreRecord)
+                .orderByDesc(KhScoreRecord::getCreateTime));
         return getDataTable(list);
     }
 

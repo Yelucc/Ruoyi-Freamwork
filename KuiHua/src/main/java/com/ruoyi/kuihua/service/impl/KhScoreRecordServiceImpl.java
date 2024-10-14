@@ -10,6 +10,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Objects;
 
+import cn.hutool.core.exceptions.ExceptionUtil;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.ruoyi.common.utils.SecurityUtils;
@@ -18,6 +19,7 @@ import com.ruoyi.kuihua.domain.KhTeam;
 import com.ruoyi.kuihua.domain.KhUser;
 import com.ruoyi.kuihua.service.KhTeamService;
 import com.ruoyi.kuihua.service.KhUserService;
+import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysUrlMapService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,11 +47,12 @@ public class KhScoreRecordServiceImpl extends ServiceImpl<KhScoreRecordMapper, K
     private static final int MAX_DATA_ITEMS = 1000; // 每次请求的最大条数
     private static final long WAIT_TIME_MS = 2000; // 每次请求的等待时间（2秒）
     @Autowired
-    private ISysUrlMapService urlMapService;
+    private ISysConfigService configService;
     @Autowired
     private KhUserService khUserService;
     @Autowired
     private KhTeamService khTeamService;
+
 
     @Transactional
     @Override
@@ -79,7 +82,14 @@ public class KhScoreRecordServiceImpl extends ServiceImpl<KhScoreRecordMapper, K
      */
     @Transactional
     @Override
-    public Boolean submitShareRecord(String sharedLink, MultipartFile[] sharedPicture) throws NoSuchAlgorithmException, IOException {
+    public Boolean submitShareRecord(String sharedLink, MultipartFile[] sharedPicture) throws IOException {
+        configService.resetConfigCache();
+        String config = configService.selectConfigByKey("kuihua.server.enable");
+
+        if (!"true".equals(config)) {
+            throw ExceptionUtil.wrapRuntime("活动未开始");
+        }
+
         KhUser khUser = khUserService.getOne(Wrappers.lambdaQuery(KhUser.class)
                 .eq(KhUser::getSysUserId, SecurityUtils.getLoginUser().getUserId()));
         long count = count(Wrappers.lambdaQuery(KhScoreRecord.class)

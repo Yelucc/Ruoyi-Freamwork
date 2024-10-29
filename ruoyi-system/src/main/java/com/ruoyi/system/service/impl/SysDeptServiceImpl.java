@@ -1,6 +1,7 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -137,6 +138,8 @@ public class SysDeptServiceImpl implements ISysDeptService
     {
         return deptMapper.selectNormalChildrenDeptById(deptId);
     }
+
+
 
     /**
      * 是否存在子节点

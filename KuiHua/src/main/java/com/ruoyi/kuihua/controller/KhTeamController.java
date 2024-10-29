@@ -43,7 +43,7 @@ public class KhTeamController extends BaseController {
     /**
      * 查询团队管理列表
      */
-    @PreAuthorize("@ss.hasPermi('KuiHua:team:list')")
+//    @PreAuthorize("@ss.hasPermi('KuiHua:team:list')")
     @GetMapping("/list")
     public TableDataInfo list(KhTeam khTeam) {
         Page<KhTeam> list = khTeamService.page(getPage(), Wrappers.lambdaQuery(khTeam));

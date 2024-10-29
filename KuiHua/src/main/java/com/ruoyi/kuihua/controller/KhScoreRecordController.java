@@ -5,11 +5,17 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.TreeSelect;
+import com.ruoyi.common.core.domain.entity.SysDept;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.kuihua.domain.KhScoreRecord;
+import com.ruoyi.kuihua.domain.KhTeam;
 import com.ruoyi.kuihua.service.KhScoreRecordService;
+import com.ruoyi.kuihua.service.KhTeamService;
+import com.ruoyi.system.service.ISysDeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +24,11 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * 葵花分数记录Controller
@@ -32,7 +41,11 @@ import java.util.List;
 public class KhScoreRecordController extends BaseController {
     @Autowired
     private KhScoreRecordService khScoreRecordService;
+    @Autowired
+    private KhTeamService teamService;
 
+    @Autowired
+    private ISysDeptService deptService;
 
     /**
      * 移动端用户上传葵花分数记录
@@ -59,9 +72,33 @@ public class KhScoreRecordController extends BaseController {
     @PreAuthorize("@ss.hasPermi('KuiHua:scoreRecord:list')")
     @GetMapping("/list")
     public TableDataInfo list(KhScoreRecord khScoreRecord) {
-        Page<KhScoreRecord> list = khScoreRecordService.page(getPage(), Wrappers.lambdaQuery(khScoreRecord)
-                .orderByDesc(KhScoreRecord::getCreateTime));
-        return getDataTable(list);
+
+
+        if (SecurityUtils.hasRole("admin")) {
+            Page<KhScoreRecord> list = khScoreRecordService.page(getPage(),
+                    Wrappers.lambdaQuery(khScoreRecord)
+                            .orderByDesc(KhScoreRecord::getCreateTime));
+            return getDataTable(list);
+        }
+        if (SecurityUtils.hasRole("KhChecker") || SecurityUtils.hasRole("KhTeamLeader")) {
+            Long deptId = SecurityUtils.getDeptId();
+            List<TreeSelect> treeSelects = deptService.selectDeptTreeList(new SysDept());
+            List<Long> deptIds = new ArrayList<>();
+            deptIds.add(deptId);
+            deptIds.addAll(TreeSelect.getSubNodesById(treeSelects,deptId).stream().map(TreeSelect::getId).collect(Collectors.toList()));
+            List<KhTeam> khTeams = deptIds.stream().map(item ->
+                    teamService.getOne(Wrappers.lambdaQuery(KhTeam.class).eq(KhTeam::getDeptId, item)))
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
+
+            Page<KhScoreRecord> list = khScoreRecordService.page(getPage(),
+                    Wrappers.lambdaQuery(khScoreRecord)
+                            .in(KhScoreRecord::getTeamId, khTeams.stream().map(KhTeam::getTeamId).collect(Collectors.toList()))
+                            .orderByDesc(KhScoreRecord::getCreateTime));
+            return getDataTable(list);
+        }
+
+        return getDataTable(new ArrayList<>());
     }
 
     /**

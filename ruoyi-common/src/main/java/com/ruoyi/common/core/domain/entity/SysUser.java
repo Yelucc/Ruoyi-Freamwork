@@ -3,6 +3,11 @@ package com.ruoyi.common.core.domain.entity;
 import java.util.Date;
 import java.util.List;
 import javax.validation.constraints.*;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -17,11 +22,13 @@ import com.ruoyi.common.xss.Xss;
  * 
  * @author ruoyi
  */
+@TableName(value = "sys_user")
 public class SysUser extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** 用户ID */
+    @TableId(type = IdType.AUTO)
     @Excel(name = "用户序号", type = Type.EXPORT, cellType = ColumnType.NUMERIC, prompt = "用户编号")
     private Long userId;
 
@@ -75,18 +82,23 @@ public class SysUser extends BaseEntity
         @Excel(name = "部门名称", targetAttr = "deptName", type = Type.EXPORT),
         @Excel(name = "部门负责人", targetAttr = "leader", type = Type.EXPORT)
     })
+    @TableField(exist = false)
     private SysDept dept;
 
     /** 角色对象 */
+    @TableField(exist = false)
     private List<SysRole> roles;
 
     /** 角色组 */
+    @TableField(exist = false)
     private Long[] roleIds;
 
     /** 岗位组 */
+    @TableField(exist = false)
     private Long[] postIds;
 
     /** 角色ID */
+    @TableField(exist = false)
     private Long roleId;
 
     public SysUser()

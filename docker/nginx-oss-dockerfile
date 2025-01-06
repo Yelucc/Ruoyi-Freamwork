@@ -1,0 +1,13 @@
+# 使用官方的 NGINX 镜像作为基础镜像
+FROM nginx:latest
+
+# 挂载目录
+VOLUME /home/app/projects/oss
+# 创建目录
+RUN mkdir -p /home/app/projects/oss
+# 指定路径
+WORKDIR /home/app/projects/oss
+# 复制conf文件到路径
+COPY ./conf/oss.conf /etc/nginx/nginx.conf
+# 暴露 NGINX 默认的 HTTP 端口
+EXPOSE 80

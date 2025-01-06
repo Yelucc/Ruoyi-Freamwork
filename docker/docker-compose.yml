@@ -1,7 +1,7 @@
-version : '3'
+
 services:
-  loya-mysql:
-    container_name: loya-mysql
+  app-mysql:
+    container_name: app-mysql
     image: mysql:5.7
     restart: unless-stopped
     build:
@@ -22,23 +22,23 @@ services:
           '--lower-case-table-names=1'
         ]
     environment:
-      MYSQL_DATABASE: 'loya'
-      MYSQL_ROOT_PASSWORD: loya@2024
-  loya-minio:
-    container_name: loya-minio
+      MYSQL_DATABASE: 'common'
+      MYSQL_ROOT_PASSWORD: 'app@2024'
+  app-minio:
+    container_name: app-minio
     restart: unless-stopped
     image: minio/minio:latest
     ports:
       - "9000:9000"
       - "9001:9001"
     environment:
-      MINIO_ROOT_USER: "loya"
-      MINIO_ROOT_PASSWORD: "loya@2024"
+      MINIO_ROOT_USER: "app"
+      MINIO_ROOT_PASSWORD: "common@2024"
     volumes:
       - ./minio/data:/data  # 持久化存储
-    command: server /data --console-address ":9001
-  loya-redis:
-    container_name: loya-redis
+    command: server /data --console-address ":9001"
+  app-redis:
+    container_name: app-redis
     image: redis:7-alpine
     restart: unless-stopped
     build:
@@ -47,11 +47,11 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - ./conf/redis.conf:/home/loya/redis/redis.conf
+      - ./conf/redis.conf:/home/app/redis/redis.conf
       - ./redis/data:/data
-    command: redis-server /home/loya/redis/redis.conf
-  loya-nginx:
-    container_name: loya-nginx
+    command: redis-server /home/app/redis/redis.conf
+  app-nginx:
+    container_name: app-nginx
     image: nginx:latest
     restart: unless-stopped
     build:
@@ -60,30 +60,30 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./html/dist:/home/loya/projects/loya-ui
+      - ./html/dist:/home/app/projects/app-ui
       - ./conf/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/logs:/var/log/nginx
       - ./nginx/conf.d:/etc/nginx/conf.d
     depends_on:
-      - loya-server
+      - app-server
     links:
-      - loya-server
-      - loya-minio
-  loya-server:
-    container_name: loya-server
+      - app-server
+      - app-minio
+  app-server:
+    container_name: app-server
     restart: unless-stopped
     build:
       context: .
-      dockerfile: loya-dockerfile
+      dockerfile: app-dockerfile
     ports:
       - "8080:8080"
     volumes:
-      - ./loya/logs:/home/loya/logs
-      - ./loya/uploadPath:/home/loya/uploadPath
+      - ./app/logs:/home/app/logs
+      - ./app/uploadPath:/home/app/uploadPath
     depends_on:
-      - loya-mysql
-      - loya-redis
+      - app-mysql
+      - app-redis
     links:
-      - loya-mysql
-      - loya-minio
-      - loya-redis
+      - app-mysql
+      - app-minio
+      - app-redis

@@ -3,7 +3,7 @@ networks:
     external: true
 services:
   loya-nginx:
-    container_name: loya-nginx
+    container_name: app-nginx
     restart: unless-stopped
     image: nginx
     networks:
@@ -19,18 +19,18 @@ services:
       - ./nginx/logs:/var/log/nginx
       - ./nginx/conf.d:/etc/nginx/conf.d
     depends_on:
-      - loya-server
+      - app-server
     links:
-      - loya-server
+      - app-server
       - common-minio
   loya-server:
-    container_name: loya-server
+    container_name: app-server
     restart: unless-stopped
     networks:
       - env_default
     build:
       context: .
-      dockerfile: loya-dockerfile
+      dockerfile: app-dockerfile
     ports:
       - "8080:8080"
     volumes:

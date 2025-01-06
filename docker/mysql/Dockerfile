@@ -4,7 +4,7 @@ FROM mysql:5.7
 # 设置 MySQL 环境变量
 ENV MYSQL_DATABASE=common \
     MYSQL_ROOT_PASSWORD=app@2024
-
+ADD ./*.sql /docker-entrypoint-initdb.d/
 # MySQL 启动时的自定义命令
 CMD ["mysqld", \
     "--innodb-buffer-pool-size=80M", \

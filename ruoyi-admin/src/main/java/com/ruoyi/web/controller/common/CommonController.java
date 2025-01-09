@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.system.service.ISysUrlMapService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.ruoyi.common.config.RuoYiConfig;
 import com.ruoyi.common.constant.Constants;
@@ -20,6 +20,8 @@ import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.file.FileUploadUtils;
 import com.ruoyi.common.utils.file.FileUtils;
 import com.ruoyi.framework.config.ServerConfig;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.view.RedirectView;
 
 /**
  * 通用请求处理
@@ -36,6 +38,18 @@ public class CommonController
     private ServerConfig serverConfig;
 
     private static final String FILE_DELIMETER = ",";
+
+    @Autowired
+    private ISysUrlMapService urlRedirectService;
+
+    @GetMapping("/r/{shortUrl}")
+    public RedirectView redirect(@PathVariable String shortUrl) {
+        String longUrl = urlRedirectService.getOriginalUrl(shortUrl);
+        if (longUrl == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "URL not found");
+        }
+        return new RedirectView(longUrl);
+    }
 
     /**
      * 通用下载请求

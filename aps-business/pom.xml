@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.autoparams</groupId>
+        <artifactId>autoparams</artifactId>
+        <version>3.8.9</version>
+    </parent>
+
+    <artifactId>autoparams-business</artifactId>
+    <packaging>pom</packaging>
+
+    <description>
+        business 业务总模块
+    </description>
+
+    <modules>
+        <module>aps-kuihua</module>
+        <module>aps-loya</module>
+    </modules>
+
+
+    <dependencies>
+
+        <!-- 通用工具-->
+        <dependency>
+            <groupId>com.autoparams</groupId>
+            <artifactId>autoparams-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>

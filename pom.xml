@@ -4,16 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.ruoyi</groupId>
-    <artifactId>ruoyi</artifactId>
+    <groupId>com.autoparams</groupId>
+    <artifactId>autoparams</artifactId>
     <version>3.8.9</version>
 
-    <name>ruoyi</name>
+    <name>aps</name>
     <url>http://www.ruoyi.vip</url>
-    <description>若依管理系统</description>
+    <description>泛型自觉后台底座</description>
 
     <properties>
-        <ruoyi.version>3.8.9</ruoyi.version>
+        <autoparams.version>3.8.9</autoparams.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -158,44 +158,44 @@
 
             <!-- 定时任务-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-quartz</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.autoparams</groupId>
+                <artifactId>autoparams-quartz</artifactId>
+                <version>${autoparams.version}</version>
             </dependency>
 
             <!-- 代码生成-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-generator</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.autoparams</groupId>
+                <artifactId>autoparams-generator</artifactId>
+                <version>${autoparams.version}</version>
             </dependency>
 
             <!-- 核心模块-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-framework</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.autoparams</groupId>
+                <artifactId>autoparams-framework</artifactId>
+                <version>${autoparams.version}</version>
             </dependency>
 
             <!-- 系统模块-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-system</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.autoparams</groupId>
+                <artifactId>autoparams-system</artifactId>
+                <version>${autoparams.version}</version>
             </dependency>
 
             <!-- 通用工具-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-common</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.autoparams</groupId>
+                <artifactId>autoparams-common</artifactId>
+                <version>${autoparams.version}</version>
             </dependency>
 
             <!-- 通用工具-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-business</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.autoparams</groupId>
+                <artifactId>autoparams-business</artifactId>
+                <version>${autoparams.version}</version>
             </dependency>
 
             <!-- Hutool 工具类增强 -->
@@ -225,13 +225,13 @@
     </dependencyManagement>
 
     <modules>
-        <module>ruoyi-admin</module>
-        <module>ruoyi-framework</module>
-        <module>ruoyi-system</module>
-        <module>ruoyi-quartz</module>
-        <module>ruoyi-generator</module>
-        <module>ruoyi-common</module>
-        <module>ruoyi-business</module>
+        <module>aps-admin</module>
+        <module>aps-framework</module>
+        <module>aps-system</module>
+        <module>aps-quartz</module>
+        <module>aps-generator</module>
+        <module>aps-common</module>
+        <module>aps-business</module>
     </modules>
     <packaging>pom</packaging>
 

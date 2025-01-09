@@ -17,8 +17,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<!-- <setting name="mapUnderscoreToCamelCase" value="true"/> -->
 	</settings>
     <typeHandlers>
-        <typeHandler handler="com.ruoyi.common.config.mybatis.StringArrayHandler"/>
-        <typeHandler handler="com.ruoyi.common.config.mybatis.JSONObjectHandler"/>
-        <typeHandler handler="com.ruoyi.common.config.mybatis.JSONArrayHandler"/>
+        <typeHandler handler="com.autoparams.common.config.mybatis.StringArrayHandler"/>
+        <typeHandler handler="com.autoparams.common.config.mybatis.JSONObjectHandler"/>
+        <typeHandler handler="com.autoparams.common.config.mybatis.JSONArrayHandler"/>
     </typeHandlers>
 </configuration>

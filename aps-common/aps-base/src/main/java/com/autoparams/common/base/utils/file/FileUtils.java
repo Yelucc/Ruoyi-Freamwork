@@ -12,14 +12,15 @@ import java.nio.charset.StandardCharsets;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import com.autoparams.common.base.config.RuoYiConfig;
 import com.autoparams.common.base.utils.DateUtils;
-import com.autoparams.common.base.utils.StringUtils;
 import com.autoparams.common.base.utils.uuid.IdUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 文件处理工具类

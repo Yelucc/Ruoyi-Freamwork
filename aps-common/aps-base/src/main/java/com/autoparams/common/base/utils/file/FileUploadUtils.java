@@ -1,19 +1,20 @@
 package com.autoparams.common.base.utils.file;
 
 
-import com.autoparams.common.base.config.MinioConfig;
 import com.autoparams.common.base.config.RuoYiConfig;
 import com.autoparams.common.base.constant.Constants;
 import com.autoparams.common.base.exception.file.FileNameLengthLimitExceededException;
 import com.autoparams.common.base.exception.file.FileSizeLimitExceededException;
+import com.autoparams.common.base.exception.file.InvalidExtensionException;
 import com.autoparams.common.base.utils.DateUtils;
 import com.autoparams.common.base.utils.StringUtils;
 import com.autoparams.common.base.utils.uuid.Seq;
 
 
 
-import com.autoparams.common.exception.file.InvalidExtensionException;
 
+
+import com.autoparams.common.base.config.MinioConfig;
 import lombok.Data;
 import lombok.Getter;
 import org.apache.commons.io.FilenameUtils;

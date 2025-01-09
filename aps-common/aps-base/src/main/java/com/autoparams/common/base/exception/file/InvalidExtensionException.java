@@ -1,4 +1,4 @@
-package com.autoparams.common.exception.file;
+package com.autoparams.common.base.exception.file;
 
 import java.util.Arrays;
 
@@ -7,7 +7,7 @@ import java.util.Arrays;
  * 
  * @author ruoyi
  */
-public class InvalidExtensionException extends FileUploadException
+public class InvalidExtensionException extends com.autoparams.common.exception.file.FileUploadException
 {
     private static final long serialVersionUID = 1L;
 

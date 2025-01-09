@@ -1,10 +1,11 @@
 package com.autoparams.web.controller.monitor;
 
+import com.autoparams.common.base.core.domain.AjaxResult;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.autoparams.common.core.domain.AjaxResult;
+
 import com.autoparams.framework.web.domain.Server;
 
 /**

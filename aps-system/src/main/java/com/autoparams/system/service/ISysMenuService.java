@@ -2,8 +2,9 @@ package com.autoparams.system.service;
 
 import java.util.List;
 import java.util.Set;
-import com.autoparams.common.core.domain.TreeSelect;
-import com.autoparams.common.core.domain.entity.SysMenu;
+
+import com.autoparams.common.base.core.domain.TreeSelect;
+import com.autoparams.common.base.core.domain.entity.SysMenu;
 import com.autoparams.system.domain.vo.RouterVo;
 
 /**

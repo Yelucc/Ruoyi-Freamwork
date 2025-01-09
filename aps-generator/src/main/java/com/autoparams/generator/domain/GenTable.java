@@ -3,10 +3,12 @@ package com.autoparams.generator.domain;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+
+import com.autoparams.common.base.constant.GenConstants;
+import com.autoparams.common.base.core.domain.BaseEntity;
+import com.autoparams.common.base.utils.StringUtils;
 import org.apache.commons.lang3.ArrayUtils;
-import com.autoparams.common.constant.GenConstants;
-import com.autoparams.common.core.domain.BaseEntity;
-import com.autoparams.common.utils.StringUtils;
+
 
 /**
  * 业务表 gen_table

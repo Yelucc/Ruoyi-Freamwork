@@ -1,7 +1,9 @@
 package com.autoparams.system.mapper;
 
+import com.autoparams.common.base.core.domain.entity.SysDictType;
+
 import java.util.List;
-import com.autoparams.common.core.domain.entity.SysDictType;
+
 
 /**
  * 字典表 数据层

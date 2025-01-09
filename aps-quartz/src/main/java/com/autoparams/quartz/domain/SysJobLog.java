@@ -1,10 +1,12 @@
 package com.autoparams.quartz.domain;
 
 import java.util.Date;
+
+import com.autoparams.common.base.annotation.Excel;
+import com.autoparams.common.base.core.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.autoparams.common.annotation.Excel;
-import com.autoparams.common.core.domain.BaseEntity;
+
 
 /**
  * 定时任务调度日志表 sys_job_log

@@ -1,8 +1,9 @@
 package com.autoparams.system.service.impl;
 
+import com.autoparams.common.base.core.domain.model.LoginUser;
+import com.autoparams.common.base.utils.StringUtils;
 import org.springframework.stereotype.Service;
-import com.autoparams.common.core.domain.model.LoginUser;
-import com.autoparams.common.utils.StringUtils;
+
 import com.autoparams.system.domain.SysUserOnline;
 import com.autoparams.system.service.ISysUserOnlineService;
 

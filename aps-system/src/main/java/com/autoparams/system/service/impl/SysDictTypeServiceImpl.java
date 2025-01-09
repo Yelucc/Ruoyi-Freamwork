@@ -5,15 +5,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
+
+import com.autoparams.common.base.constant.UserConstants;
+import com.autoparams.common.base.core.domain.entity.SysDictData;
+import com.autoparams.common.base.core.domain.entity.SysDictType;
+import com.autoparams.common.base.utils.DictUtils;
+import com.autoparams.common.base.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.autoparams.common.constant.UserConstants;
-import com.autoparams.common.core.domain.entity.SysDictData;
-import com.autoparams.common.core.domain.entity.SysDictType;
+
 import com.autoparams.common.exception.ServiceException;
-import com.autoparams.common.utils.DictUtils;
-import com.autoparams.common.utils.StringUtils;
+
 import com.autoparams.system.mapper.SysDictDataMapper;
 import com.autoparams.system.mapper.SysDictTypeMapper;
 import com.autoparams.system.service.ISysDictTypeService;

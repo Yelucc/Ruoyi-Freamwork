@@ -3,16 +3,19 @@ package com.autoparams.system.service.impl;
 import java.util.Collection;
 import java.util.List;
 import javax.annotation.PostConstruct;
+
+import com.autoparams.common.base.annotation.DataSource;
+import com.autoparams.common.base.constant.CacheConstants;
+import com.autoparams.common.base.constant.UserConstants;
+import com.autoparams.common.base.core.redis.RedisCache;
+import com.autoparams.common.base.core.text.Convert;
+import com.autoparams.common.base.enums.DataSourceType;
+import com.autoparams.common.base.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.autoparams.common.annotation.DataSource;
-import com.autoparams.common.constant.CacheConstants;
-import com.autoparams.common.constant.UserConstants;
-import com.autoparams.common.core.redis.RedisCache;
-import com.autoparams.common.core.text.Convert;
-import com.autoparams.common.enums.DataSourceType;
+
 import com.autoparams.common.exception.ServiceException;
-import com.autoparams.common.utils.StringUtils;
+
 import com.autoparams.system.domain.SysConfig;
 import com.autoparams.system.mapper.SysConfigMapper;
 import com.autoparams.system.service.ISysConfigService;

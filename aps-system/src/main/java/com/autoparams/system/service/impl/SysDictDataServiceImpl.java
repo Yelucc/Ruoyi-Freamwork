@@ -1,10 +1,12 @@
 package com.autoparams.system.service.impl;
 
 import java.util.List;
+
+import com.autoparams.common.base.core.domain.entity.SysDictData;
+import com.autoparams.common.base.utils.DictUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.autoparams.common.core.domain.entity.SysDictData;
-import com.autoparams.common.utils.DictUtils;
+
 import com.autoparams.system.mapper.SysDictDataMapper;
 import com.autoparams.system.service.ISysDictDataService;
 

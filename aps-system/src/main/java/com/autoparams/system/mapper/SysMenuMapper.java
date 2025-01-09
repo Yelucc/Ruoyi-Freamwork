@@ -1,8 +1,10 @@
 package com.autoparams.system.mapper;
 
 import java.util.List;
+
+import com.autoparams.common.base.core.domain.entity.SysMenu;
 import org.apache.ibatis.annotations.Param;
-import com.autoparams.common.core.domain.entity.SysMenu;
+
 
 /**
  * 菜单表 数据层

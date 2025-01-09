@@ -2,10 +2,12 @@ package com.autoparams.system.domain;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.autoparams.common.base.core.domain.BaseEntity;
+import com.autoparams.common.base.xss.Xss;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.autoparams.common.core.domain.BaseEntity;
-import com.autoparams.common.xss.Xss;
+
 
 /**
  * 通知公告表 sys_notice

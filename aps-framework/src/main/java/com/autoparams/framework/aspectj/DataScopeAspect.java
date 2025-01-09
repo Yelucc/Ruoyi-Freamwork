@@ -2,19 +2,21 @@ package com.autoparams.framework.aspectj;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.autoparams.common.base.annotation.DataScope;
+import com.autoparams.common.base.constant.UserConstants;
+import com.autoparams.common.base.core.domain.BaseEntity;
+import com.autoparams.common.base.core.domain.entity.SysRole;
+import com.autoparams.common.base.core.domain.entity.SysUser;
+import com.autoparams.common.base.core.domain.model.LoginUser;
+import com.autoparams.common.base.core.text.Convert;
+import com.autoparams.common.base.utils.SecurityUtils;
+import com.autoparams.common.base.utils.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
-import com.autoparams.common.annotation.DataScope;
-import com.autoparams.common.constant.UserConstants;
-import com.autoparams.common.core.domain.BaseEntity;
-import com.autoparams.common.core.domain.entity.SysRole;
-import com.autoparams.common.core.domain.entity.SysUser;
-import com.autoparams.common.core.domain.model.LoginUser;
-import com.autoparams.common.core.text.Convert;
-import com.autoparams.common.utils.SecurityUtils;
-import com.autoparams.common.utils.StringUtils;
+
 import com.autoparams.framework.security.context.PermissionContextHolder;
 
 /**

@@ -1,6 +1,7 @@
 package com.autoparams.framework.web.domain.server;
 
-import com.autoparams.common.utils.Arith;
+
+import com.autoparams.common.base.utils.Arith;
 
 /**
  * 內存相关信息

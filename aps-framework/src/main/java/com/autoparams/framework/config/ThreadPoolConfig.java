@@ -1,6 +1,7 @@
 package com.autoparams.framework.config;
 
-import com.autoparams.common.utils.Threads;
+
+import com.autoparams.common.base.utils.Threads;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

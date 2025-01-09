@@ -5,17 +5,20 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import com.autoparams.common.base.annotation.DataScope;
+import com.autoparams.common.base.constant.UserConstants;
+import com.autoparams.common.base.core.domain.entity.SysRole;
+import com.autoparams.common.base.core.domain.entity.SysUser;
+import com.autoparams.common.base.utils.SecurityUtils;
+import com.autoparams.common.base.utils.StringUtils;
+import com.autoparams.common.base.utils.spring.SpringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.autoparams.common.annotation.DataScope;
-import com.autoparams.common.constant.UserConstants;
-import com.autoparams.common.core.domain.entity.SysRole;
-import com.autoparams.common.core.domain.entity.SysUser;
+
 import com.autoparams.common.exception.ServiceException;
-import com.autoparams.common.utils.SecurityUtils;
-import com.autoparams.common.utils.StringUtils;
-import com.autoparams.common.utils.spring.SpringUtils;
+
 import com.autoparams.system.domain.SysRoleDept;
 import com.autoparams.system.domain.SysRoleMenu;
 import com.autoparams.system.domain.SysUserRole;

@@ -1,6 +1,7 @@
 package com.autoparams.system.service;
 
-import com.autoparams.common.core.domain.model.LoginUser;
+
+import com.autoparams.common.base.core.domain.model.LoginUser;
 import com.autoparams.system.domain.SysUserOnline;
 
 /**

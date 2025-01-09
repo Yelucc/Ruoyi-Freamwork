@@ -2,6 +2,8 @@ package com.autoparams.quartz.service.impl;
 
 import java.util.List;
 import javax.annotation.PostConstruct;
+
+import com.autoparams.common.base.constant.ScheduleConstants;
 import org.quartz.JobDataMap;
 import org.quartz.JobKey;
 import org.quartz.Scheduler;
@@ -9,7 +11,7 @@ import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.autoparams.common.constant.ScheduleConstants;
+
 import com.autoparams.common.exception.job.TaskException;
 import com.autoparams.quartz.domain.SysJob;
 import com.autoparams.quartz.mapper.SysJobMapper;

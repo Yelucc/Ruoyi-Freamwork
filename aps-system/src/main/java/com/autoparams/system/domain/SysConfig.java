@@ -2,11 +2,12 @@ package com.autoparams.system.domain;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.autoparams.common.base.annotation.Excel;
+import com.autoparams.common.base.core.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.autoparams.common.annotation.Excel;
-import com.autoparams.common.annotation.Excel.ColumnType;
-import com.autoparams.common.core.domain.BaseEntity;
+
 
 /**
  * 参数配置表 sys_config
@@ -18,7 +19,7 @@ public class SysConfig extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 参数主键 */
-    @Excel(name = "参数主键", cellType = ColumnType.NUMERIC)
+    @Excel(name = "参数主键", cellType = Excel.ColumnType.NUMERIC)
     private Long configId;
 
     /** 参数名称 */

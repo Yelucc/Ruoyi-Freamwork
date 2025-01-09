@@ -4,19 +4,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.autoparams.common.base.annotation.DataScope;
+import com.autoparams.common.base.constant.UserConstants;
+import com.autoparams.common.base.core.domain.TreeSelect;
+import com.autoparams.common.base.core.domain.entity.SysDept;
+import com.autoparams.common.base.core.domain.entity.SysRole;
+import com.autoparams.common.base.core.domain.entity.SysUser;
+import com.autoparams.common.base.core.text.Convert;
+import com.autoparams.common.base.utils.SecurityUtils;
+import com.autoparams.common.base.utils.StringUtils;
+import com.autoparams.common.base.utils.spring.SpringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.autoparams.common.annotation.DataScope;
-import com.autoparams.common.constant.UserConstants;
-import com.autoparams.common.core.domain.TreeSelect;
-import com.autoparams.common.core.domain.entity.SysDept;
-import com.autoparams.common.core.domain.entity.SysRole;
-import com.autoparams.common.core.domain.entity.SysUser;
-import com.autoparams.common.core.text.Convert;
+
 import com.autoparams.common.exception.ServiceException;
-import com.autoparams.common.utils.SecurityUtils;
-import com.autoparams.common.utils.StringUtils;
-import com.autoparams.common.utils.spring.SpringUtils;
+
 import com.autoparams.system.mapper.SysDeptMapper;
 import com.autoparams.system.mapper.SysRoleMapper;
 import com.autoparams.system.service.ISysDeptService;

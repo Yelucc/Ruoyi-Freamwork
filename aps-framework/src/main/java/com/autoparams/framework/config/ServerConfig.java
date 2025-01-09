@@ -1,8 +1,10 @@
 package com.autoparams.framework.config;
 
 import javax.servlet.http.HttpServletRequest;
+
+import com.autoparams.common.base.utils.ServletUtils;
 import org.springframework.stereotype.Component;
-import com.autoparams.common.utils.ServletUtils;
+
 
 /**
  * 服务相关配置

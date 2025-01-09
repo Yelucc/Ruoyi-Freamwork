@@ -11,6 +11,11 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+
+import com.autoparams.common.base.constant.Constants;
+import com.autoparams.common.base.constant.GenConstants;
+import com.autoparams.common.base.core.text.CharsetKit;
+import com.autoparams.common.base.utils.StringUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
@@ -23,11 +28,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import com.autoparams.common.constant.Constants;
-import com.autoparams.common.constant.GenConstants;
-import com.autoparams.common.core.text.CharsetKit;
+
 import com.autoparams.common.exception.ServiceException;
-import com.autoparams.common.utils.StringUtils;
+
 import com.autoparams.generator.domain.GenTable;
 import com.autoparams.generator.domain.GenTableColumn;
 import com.autoparams.generator.mapper.GenTableColumnMapper;

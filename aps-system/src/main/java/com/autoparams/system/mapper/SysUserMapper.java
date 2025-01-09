@@ -1,8 +1,10 @@
 package com.autoparams.system.mapper;
 
 import java.util.List;
+
+import com.autoparams.common.base.core.domain.entity.SysUser;
 import org.apache.ibatis.annotations.Param;
-import com.autoparams.common.core.domain.entity.SysUser;
+
 
 /**
  * 用户表 数据层

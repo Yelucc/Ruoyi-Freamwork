@@ -1,13 +1,15 @@
 package com.autoparams.framework.web.service;
 
 import java.util.Set;
+
+import com.autoparams.common.base.constant.Constants;
+import com.autoparams.common.base.core.domain.entity.SysRole;
+import com.autoparams.common.base.core.domain.model.LoginUser;
+import com.autoparams.common.base.utils.SecurityUtils;
+import com.autoparams.common.base.utils.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import com.autoparams.common.constant.Constants;
-import com.autoparams.common.core.domain.entity.SysRole;
-import com.autoparams.common.core.domain.model.LoginUser;
-import com.autoparams.common.utils.SecurityUtils;
-import com.autoparams.common.utils.StringUtils;
+
 import com.autoparams.framework.security.context.PermissionContextHolder;
 
 /**

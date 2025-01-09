@@ -4,8 +4,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
-import com.autoparams.common.utils.StringUtils;
-import com.autoparams.common.utils.spring.SpringUtils;
+
+import com.autoparams.common.base.utils.StringUtils;
+import com.autoparams.common.base.utils.spring.SpringUtils;
 import com.autoparams.quartz.domain.SysJob;
 
 /**

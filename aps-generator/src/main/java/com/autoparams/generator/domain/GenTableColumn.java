@@ -1,8 +1,10 @@
 package com.autoparams.generator.domain;
 
+import com.autoparams.common.base.core.domain.BaseEntity;
+import com.autoparams.common.base.utils.StringUtils;
+
 import javax.validation.constraints.NotBlank;
-import com.autoparams.common.core.domain.BaseEntity;
-import com.autoparams.common.utils.StringUtils;
+
 
 /**
  * 代码生成业务字段表 gen_table_column

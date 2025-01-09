@@ -1,10 +1,11 @@
 package com.autoparams.web.controller.system;
 
+import com.autoparams.common.base.config.RuoYiConfig;
+import com.autoparams.common.base.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.autoparams.common.config.RuoYiConfig;
-import com.autoparams.common.utils.StringUtils;
+
 
 /**
  * 首页

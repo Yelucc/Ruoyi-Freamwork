@@ -1,8 +1,10 @@
 package com.autoparams.system.service;
 
+import com.autoparams.common.base.core.domain.entity.SysDictData;
+import com.autoparams.common.base.core.domain.entity.SysDictType;
+
 import java.util.List;
-import com.autoparams.common.core.domain.entity.SysDictData;
-import com.autoparams.common.core.domain.entity.SysDictType;
+
 
 /**
  * 字典 业务层

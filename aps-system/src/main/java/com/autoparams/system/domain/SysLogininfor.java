@@ -1,10 +1,10 @@
 package com.autoparams.system.domain;
 
 import java.util.Date;
+
+import com.autoparams.common.base.annotation.Excel;
+import com.autoparams.common.base.core.domain.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.autoparams.common.annotation.Excel;
-import com.autoparams.common.annotation.Excel.ColumnType;
-import com.autoparams.common.core.domain.BaseEntity;
 
 /**
  * 系统访问记录表 sys_logininfor
@@ -16,7 +16,7 @@ public class SysLogininfor extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** ID */
-    @Excel(name = "序号", cellType = ColumnType.NUMERIC)
+    @Excel(name = "序号", cellType = Excel.ColumnType.NUMERIC)
     private Long infoId;
 
     /** 用户账号 */

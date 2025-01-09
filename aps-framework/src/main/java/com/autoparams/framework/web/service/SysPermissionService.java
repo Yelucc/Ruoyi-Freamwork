@@ -3,13 +3,15 @@ package com.autoparams.framework.web.service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import com.autoparams.common.base.constant.UserConstants;
+import com.autoparams.common.base.core.domain.entity.SysRole;
+import com.autoparams.common.base.core.domain.entity.SysUser;
+import com.autoparams.common.base.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
-import com.autoparams.common.constant.UserConstants;
-import com.autoparams.common.core.domain.entity.SysRole;
-import com.autoparams.common.core.domain.entity.SysUser;
-import com.autoparams.common.utils.StringUtils;
+
 import com.autoparams.system.service.ISysMenuService;
 import com.autoparams.system.service.ISysRoleService;
 

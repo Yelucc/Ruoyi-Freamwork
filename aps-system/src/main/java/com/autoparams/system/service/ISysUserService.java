@@ -1,7 +1,9 @@
 package com.autoparams.system.service;
 
+import com.autoparams.common.base.core.domain.entity.SysUser;
+
 import java.util.List;
-import com.autoparams.common.core.domain.entity.SysUser;
+
 
 /**
  * 用户 业务层

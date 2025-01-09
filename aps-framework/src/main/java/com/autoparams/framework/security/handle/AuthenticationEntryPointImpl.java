@@ -4,14 +4,16 @@ import java.io.IOException;
 import java.io.Serializable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.autoparams.common.base.constant.HttpStatus;
+import com.autoparams.common.base.core.domain.AjaxResult;
+import com.autoparams.common.base.utils.ServletUtils;
+import com.autoparams.common.base.utils.StringUtils;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 import com.alibaba.fastjson2.JSON;
-import com.autoparams.common.constant.HttpStatus;
-import com.autoparams.common.core.domain.AjaxResult;
-import com.autoparams.common.utils.ServletUtils;
-import com.autoparams.common.utils.StringUtils;
+
 
 /**
  * 认证失败处理类 返回未授权

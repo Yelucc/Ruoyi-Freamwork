@@ -1,8 +1,9 @@
 package com.autoparams.generator.util;
 
 import java.util.Properties;
+
+import com.autoparams.common.base.constant.Constants;
 import org.apache.velocity.app.Velocity;
-import com.autoparams.common.constant.Constants;
 
 /**
  * VelocityEngine工厂

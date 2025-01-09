@@ -1,5 +1,9 @@
 package com.autoparams.quartz.util;
 
+import com.autoparams.common.base.constant.Constants;
+import com.autoparams.common.base.constant.ScheduleConstants;
+import com.autoparams.common.base.utils.StringUtils;
+import com.autoparams.common.base.utils.spring.SpringUtils;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
 import org.quartz.Job;
@@ -10,12 +14,10 @@ import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
-import com.autoparams.common.constant.Constants;
-import com.autoparams.common.constant.ScheduleConstants;
+
 import com.autoparams.common.exception.job.TaskException;
 import com.autoparams.common.exception.job.TaskException.Code;
-import com.autoparams.common.utils.StringUtils;
-import com.autoparams.common.utils.spring.SpringUtils;
+
 import com.autoparams.quartz.domain.SysJob;
 
 /**

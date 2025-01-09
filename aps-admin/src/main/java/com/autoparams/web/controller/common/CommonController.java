@@ -5,6 +5,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.autoparams.common.base.config.RuoYiConfig;
+import com.autoparams.common.base.constant.Constants;
+import com.autoparams.common.base.core.domain.AjaxResult;
+import com.autoparams.common.base.utils.StringUtils;
+import com.autoparams.common.base.utils.file.FileUploadUtils;
+import com.autoparams.common.base.utils.file.FileUtils;
 import com.autoparams.system.service.ISysUrlMapService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,12 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import com.autoparams.common.config.RuoYiConfig;
-import com.autoparams.common.constant.Constants;
-import com.autoparams.common.core.domain.AjaxResult;
-import com.autoparams.common.utils.StringUtils;
-import com.autoparams.common.utils.file.FileUploadUtils;
-import com.autoparams.common.utils.file.FileUtils;
+
 import com.autoparams.framework.config.ServerConfig;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.view.RedirectView;

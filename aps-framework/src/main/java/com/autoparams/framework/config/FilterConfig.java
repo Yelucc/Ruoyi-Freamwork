@@ -3,14 +3,16 @@ package com.autoparams.framework.config;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.DispatcherType;
+
+import com.autoparams.common.base.filter.RepeatableFilter;
+import com.autoparams.common.base.filter.XssFilter;
+import com.autoparams.common.base.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.autoparams.common.filter.RepeatableFilter;
-import com.autoparams.common.filter.XssFilter;
-import com.autoparams.common.utils.StringUtils;
+
 
 /**
  * Filter配置

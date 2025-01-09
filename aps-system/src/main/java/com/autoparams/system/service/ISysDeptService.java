@@ -1,8 +1,10 @@
 package com.autoparams.system.service;
 
+import com.autoparams.common.base.core.domain.TreeSelect;
+import com.autoparams.common.base.core.domain.entity.SysDept;
+
 import java.util.List;
-import com.autoparams.common.core.domain.TreeSelect;
-import com.autoparams.common.core.domain.entity.SysDept;
+
 
 /**
  * 部门管理 服务层

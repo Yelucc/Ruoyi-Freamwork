@@ -1,18 +1,19 @@
 package com.autoparams.framework.web.service;
 
+import com.autoparams.common.base.constant.CacheConstants;
+import com.autoparams.common.base.constant.Constants;
+import com.autoparams.common.base.constant.UserConstants;
+import com.autoparams.common.base.core.domain.entity.SysUser;
+import com.autoparams.common.base.core.domain.model.RegisterBody;
+import com.autoparams.common.base.core.redis.RedisCache;
+import com.autoparams.common.base.exception.user.CaptchaException;
+import com.autoparams.common.base.exception.user.CaptchaExpireException;
+import com.autoparams.common.base.utils.MessageUtils;
+import com.autoparams.common.base.utils.SecurityUtils;
+import com.autoparams.common.base.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.autoparams.common.constant.CacheConstants;
-import com.autoparams.common.constant.Constants;
-import com.autoparams.common.constant.UserConstants;
-import com.autoparams.common.core.domain.entity.SysUser;
-import com.autoparams.common.core.domain.model.RegisterBody;
-import com.autoparams.common.core.redis.RedisCache;
-import com.autoparams.common.exception.user.CaptchaException;
-import com.autoparams.common.exception.user.CaptchaExpireException;
-import com.autoparams.common.utils.MessageUtils;
-import com.autoparams.common.utils.SecurityUtils;
-import com.autoparams.common.utils.StringUtils;
+
 import com.autoparams.framework.manager.AsyncManager;
 import com.autoparams.framework.manager.factory.AsyncFactory;
 import com.autoparams.system.service.ISysConfigService;

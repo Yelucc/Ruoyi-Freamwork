@@ -1,8 +1,9 @@
 package com.autoparams.framework.security.context;
 
+import com.autoparams.common.base.core.text.Convert;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
-import com.autoparams.common.core.text.Convert;
+
 
 /**
  * 权限信息

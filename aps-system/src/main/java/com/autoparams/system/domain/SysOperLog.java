@@ -1,10 +1,10 @@
 package com.autoparams.system.domain;
 
 import java.util.Date;
+
+import com.autoparams.common.base.annotation.Excel;
+import com.autoparams.common.base.core.domain.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.autoparams.common.annotation.Excel;
-import com.autoparams.common.annotation.Excel.ColumnType;
-import com.autoparams.common.core.domain.BaseEntity;
 
 /**
  * 操作日志记录表 oper_log
@@ -16,7 +16,7 @@ public class SysOperLog extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 日志主键 */
-    @Excel(name = "操作序号", cellType = ColumnType.NUMERIC)
+    @Excel(name = "操作序号", cellType = Excel.ColumnType.NUMERIC)
     private Long operId;
 
     /** 操作模块 */

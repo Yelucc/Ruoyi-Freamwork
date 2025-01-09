@@ -1,6 +1,9 @@
 package com.autoparams.framework.aspectj;
 
 import java.util.Objects;
+
+import com.autoparams.common.base.annotation.DataSource;
+import com.autoparams.common.base.utils.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -11,8 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import com.autoparams.common.annotation.DataSource;
-import com.autoparams.common.utils.StringUtils;
+
 import com.autoparams.framework.datasource.DynamicDataSourceContextHolder;
 
 /**
@@ -27,8 +29,8 @@ public class DataSourceAspect
 {
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Pointcut("@annotation(com.autoparams.common.annotation.DataSource)"
-            + "|| @within(com.autoparams.common.annotation.DataSource)")
+    @Pointcut("@annotation(com.autoparams.common.base.annotation.DataSource)"
+            + "|| @within(com.autoparams.common.base.annotation.DataSource)")
     public void dsPointCut()
     {
 

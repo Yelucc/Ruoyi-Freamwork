@@ -1,16 +1,18 @@
 package com.autoparams.framework.web.service;
 
 import java.util.concurrent.TimeUnit;
+
+import com.autoparams.common.base.constant.CacheConstants;
+import com.autoparams.common.base.core.domain.entity.SysUser;
+import com.autoparams.common.base.core.redis.RedisCache;
+import com.autoparams.common.base.exception.user.UserPasswordNotMatchException;
+import com.autoparams.common.base.exception.user.UserPasswordRetryLimitExceedException;
+import com.autoparams.common.base.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-import com.autoparams.common.constant.CacheConstants;
-import com.autoparams.common.core.domain.entity.SysUser;
-import com.autoparams.common.core.redis.RedisCache;
-import com.autoparams.common.exception.user.UserPasswordNotMatchException;
-import com.autoparams.common.exception.user.UserPasswordRetryLimitExceedException;
-import com.autoparams.common.utils.SecurityUtils;
+
 import com.autoparams.framework.security.context.AuthenticationContextHolder;
 
 /**

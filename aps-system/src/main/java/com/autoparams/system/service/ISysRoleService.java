@@ -2,7 +2,8 @@ package com.autoparams.system.service;
 
 import java.util.List;
 import java.util.Set;
-import com.autoparams.common.core.domain.entity.SysRole;
+
+import com.autoparams.common.base.core.domain.entity.SysRole;
 import com.autoparams.system.domain.SysUserRole;
 
 /**

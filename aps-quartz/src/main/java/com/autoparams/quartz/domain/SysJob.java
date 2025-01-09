@@ -3,14 +3,15 @@ package com.autoparams.quartz.domain;
 import java.util.Date;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.autoparams.common.base.annotation.Excel;
+import com.autoparams.common.base.constant.ScheduleConstants;
+import com.autoparams.common.base.core.domain.BaseEntity;
+import com.autoparams.common.base.utils.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.autoparams.common.annotation.Excel;
-import com.autoparams.common.annotation.Excel.ColumnType;
-import com.autoparams.common.constant.ScheduleConstants;
-import com.autoparams.common.core.domain.BaseEntity;
-import com.autoparams.common.utils.StringUtils;
+
 import com.autoparams.quartz.util.CronUtils;
 
 /**
@@ -23,7 +24,7 @@ public class SysJob extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 任务ID */
-    @Excel(name = "任务序号", cellType = ColumnType.NUMERIC)
+    @Excel(name = "任务序号", cellType = Excel.ColumnType.NUMERIC)
     private Long jobId;
 
     /** 任务名称 */

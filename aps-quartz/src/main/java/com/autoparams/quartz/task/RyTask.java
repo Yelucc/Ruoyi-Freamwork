@@ -1,7 +1,7 @@
 package com.autoparams.quartz.task;
 
+import com.autoparams.common.base.utils.StringUtils;
 import org.springframework.stereotype.Component;
-import com.autoparams.common.utils.StringUtils;
 
 /**
  * 定时任务调度测试

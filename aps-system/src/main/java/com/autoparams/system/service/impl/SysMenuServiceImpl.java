@@ -8,16 +8,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import com.autoparams.common.base.constant.Constants;
+import com.autoparams.common.base.constant.UserConstants;
+import com.autoparams.common.base.core.domain.TreeSelect;
+import com.autoparams.common.base.core.domain.entity.SysMenu;
+import com.autoparams.common.base.core.domain.entity.SysRole;
+import com.autoparams.common.base.core.domain.entity.SysUser;
+import com.autoparams.common.base.utils.SecurityUtils;
+import com.autoparams.common.base.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.autoparams.common.constant.Constants;
-import com.autoparams.common.constant.UserConstants;
-import com.autoparams.common.core.domain.TreeSelect;
-import com.autoparams.common.core.domain.entity.SysMenu;
-import com.autoparams.common.core.domain.entity.SysRole;
-import com.autoparams.common.core.domain.entity.SysUser;
-import com.autoparams.common.utils.SecurityUtils;
-import com.autoparams.common.utils.StringUtils;
+
 import com.autoparams.system.domain.vo.MetaVo;
 import com.autoparams.system.domain.vo.RouterVo;
 import com.autoparams.system.mapper.SysMenuMapper;

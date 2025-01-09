@@ -4,8 +4,9 @@ import java.net.UnknownHostException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
-import com.autoparams.common.utils.Arith;
-import com.autoparams.common.utils.ip.IpUtils;
+
+import com.autoparams.common.base.utils.Arith;
+import com.autoparams.common.base.utils.ip.IpUtils;
 import com.autoparams.framework.web.domain.server.Cpu;
 import com.autoparams.framework.web.domain.server.Jvm;
 import com.autoparams.framework.web.domain.server.Mem;

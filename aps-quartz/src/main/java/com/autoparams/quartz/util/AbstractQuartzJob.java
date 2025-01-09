@@ -1,17 +1,19 @@
 package com.autoparams.quartz.util;
 
 import java.util.Date;
+
+import com.autoparams.common.base.constant.Constants;
+import com.autoparams.common.base.constant.ScheduleConstants;
+import com.autoparams.common.base.utils.ExceptionUtil;
+import com.autoparams.common.base.utils.StringUtils;
+import com.autoparams.common.base.utils.bean.BeanUtils;
+import com.autoparams.common.base.utils.spring.SpringUtils;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.autoparams.common.constant.Constants;
-import com.autoparams.common.constant.ScheduleConstants;
-import com.autoparams.common.utils.ExceptionUtil;
-import com.autoparams.common.utils.StringUtils;
-import com.autoparams.common.utils.bean.BeanUtils;
-import com.autoparams.common.utils.spring.SpringUtils;
+
 import com.autoparams.quartz.domain.SysJob;
 import com.autoparams.quartz.domain.SysJobLog;
 import com.autoparams.quartz.service.ISysJobLogService;

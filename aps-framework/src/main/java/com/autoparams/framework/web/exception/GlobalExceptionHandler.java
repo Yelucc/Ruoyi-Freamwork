@@ -1,6 +1,12 @@
 package com.autoparams.framework.web.exception;
 
 import javax.servlet.http.HttpServletRequest;
+
+import com.autoparams.common.base.constant.HttpStatus;
+import com.autoparams.common.base.core.domain.AjaxResult;
+import com.autoparams.common.base.core.text.Convert;
+import com.autoparams.common.base.utils.StringUtils;
+import com.autoparams.common.base.utils.html.EscapeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
@@ -11,13 +17,10 @@ import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-import com.autoparams.common.constant.HttpStatus;
-import com.autoparams.common.core.domain.AjaxResult;
-import com.autoparams.common.core.text.Convert;
+
 import com.autoparams.common.exception.DemoModeException;
 import com.autoparams.common.exception.ServiceException;
-import com.autoparams.common.utils.StringUtils;
-import com.autoparams.common.utils.html.EscapeUtil;
+
 
 /**
  * 全局异常处理器

@@ -3,11 +3,11 @@ package com.autoparams.system.domain;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.autoparams.common.base.annotation.Excel;
+import com.autoparams.common.base.core.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.autoparams.common.annotation.Excel;
-import com.autoparams.common.annotation.Excel.ColumnType;
-import com.autoparams.common.core.domain.BaseEntity;
 
 /**
  * 岗位表 sys_post
@@ -19,7 +19,7 @@ public class SysPost extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 岗位序号 */
-    @Excel(name = "岗位序号", cellType = ColumnType.NUMERIC)
+    @Excel(name = "岗位序号", cellType = Excel.ColumnType.NUMERIC)
     private Long postId;
 
     /** 岗位编码 */

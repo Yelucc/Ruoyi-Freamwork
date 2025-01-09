@@ -1,9 +1,11 @@
 package com.autoparams.generator.util;
 
 import java.util.Arrays;
+
+import com.autoparams.common.base.constant.GenConstants;
+import com.autoparams.common.base.utils.StringUtils;
 import org.apache.commons.lang3.RegExUtils;
-import com.autoparams.common.constant.GenConstants;
-import com.autoparams.common.utils.StringUtils;
+
 import com.autoparams.generator.config.GenConfig;
 import com.autoparams.generator.domain.GenTable;
 import com.autoparams.generator.domain.GenTableColumn;

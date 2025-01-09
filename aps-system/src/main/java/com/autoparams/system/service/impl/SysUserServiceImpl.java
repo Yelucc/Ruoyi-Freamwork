@@ -4,21 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Validator;
+
+import com.autoparams.common.base.annotation.DataScope;
+import com.autoparams.common.base.constant.UserConstants;
+import com.autoparams.common.base.core.domain.entity.SysRole;
+import com.autoparams.common.base.core.domain.entity.SysUser;
+import com.autoparams.common.base.utils.SecurityUtils;
+import com.autoparams.common.base.utils.StringUtils;
+import com.autoparams.common.base.utils.bean.BeanValidators;
+import com.autoparams.common.base.utils.spring.SpringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
-import com.autoparams.common.annotation.DataScope;
-import com.autoparams.common.constant.UserConstants;
-import com.autoparams.common.core.domain.entity.SysRole;
-import com.autoparams.common.core.domain.entity.SysUser;
+
 import com.autoparams.common.exception.ServiceException;
-import com.autoparams.common.utils.SecurityUtils;
-import com.autoparams.common.utils.StringUtils;
-import com.autoparams.common.utils.bean.BeanValidators;
-import com.autoparams.common.utils.spring.SpringUtils;
+
 import com.autoparams.system.domain.SysPost;
 import com.autoparams.system.domain.SysUserPost;
 import com.autoparams.system.domain.SysUserRole;

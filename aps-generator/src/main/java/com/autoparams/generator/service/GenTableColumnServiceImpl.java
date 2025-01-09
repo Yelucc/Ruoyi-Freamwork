@@ -1,9 +1,11 @@
 package com.autoparams.generator.service;
 
 import java.util.List;
+
+import com.autoparams.common.base.core.text.Convert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.autoparams.common.core.text.Convert;
+
 import com.autoparams.generator.domain.GenTableColumn;
 import com.autoparams.generator.mapper.GenTableColumnMapper;
 

@@ -1,6 +1,18 @@
 package com.autoparams.web.controller.system;
 
 import java.util.Map;
+
+import com.autoparams.common.base.annotation.Log;
+import com.autoparams.common.base.config.RuoYiConfig;
+import com.autoparams.common.base.core.controller.BaseController;
+import com.autoparams.common.base.core.domain.AjaxResult;
+import com.autoparams.common.base.core.domain.entity.SysUser;
+import com.autoparams.common.base.core.domain.model.LoginUser;
+import com.autoparams.common.base.enums.BusinessType;
+import com.autoparams.common.base.utils.SecurityUtils;
+import com.autoparams.common.base.utils.StringUtils;
+import com.autoparams.common.base.utils.file.FileUploadUtils;
+import com.autoparams.common.base.utils.file.MimeTypeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,17 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import com.autoparams.common.annotation.Log;
-import com.autoparams.common.config.RuoYiConfig;
-import com.autoparams.common.core.controller.BaseController;
-import com.autoparams.common.core.domain.AjaxResult;
-import com.autoparams.common.core.domain.entity.SysUser;
-import com.autoparams.common.core.domain.model.LoginUser;
-import com.autoparams.common.enums.BusinessType;
-import com.autoparams.common.utils.SecurityUtils;
-import com.autoparams.common.utils.StringUtils;
-import com.autoparams.common.utils.file.FileUploadUtils;
-import com.autoparams.common.utils.file.MimeTypeUtils;
+
 import com.autoparams.framework.web.service.TokenService;
 import com.autoparams.system.service.ISysUserService;
 

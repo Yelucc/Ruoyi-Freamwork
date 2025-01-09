@@ -6,18 +6,20 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
+
+import com.autoparams.common.base.config.RuoYiConfig;
+import com.autoparams.common.base.constant.CacheConstants;
+import com.autoparams.common.base.constant.Constants;
+import com.autoparams.common.base.core.domain.AjaxResult;
+import com.autoparams.common.base.core.redis.RedisCache;
+import com.autoparams.common.base.utils.sign.Base64;
+import com.autoparams.common.base.utils.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FastByteArrayOutputStream;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.google.code.kaptcha.Producer;
-import com.autoparams.common.config.RuoYiConfig;
-import com.autoparams.common.constant.CacheConstants;
-import com.autoparams.common.constant.Constants;
-import com.autoparams.common.core.domain.AjaxResult;
-import com.autoparams.common.core.redis.RedisCache;
-import com.autoparams.common.utils.sign.Base64;
-import com.autoparams.common.utils.uuid.IdUtils;
+
 import com.autoparams.system.service.ISysConfigService;
 
 /**

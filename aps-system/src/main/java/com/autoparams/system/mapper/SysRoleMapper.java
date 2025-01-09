@@ -1,7 +1,9 @@
 package com.autoparams.system.mapper;
 
+import com.autoparams.common.base.core.domain.entity.SysRole;
+
 import java.util.List;
-import com.autoparams.common.core.domain.entity.SysRole;
+
 
 /**
  * 角色表 数据层

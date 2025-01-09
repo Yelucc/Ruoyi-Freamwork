@@ -1,13 +1,14 @@
 package com.autoparams.web.controller.system;
 
+import com.autoparams.common.base.core.controller.BaseController;
+import com.autoparams.common.base.core.domain.AjaxResult;
+import com.autoparams.common.base.core.domain.model.RegisterBody;
+import com.autoparams.common.base.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.autoparams.common.core.controller.BaseController;
-import com.autoparams.common.core.domain.AjaxResult;
-import com.autoparams.common.core.domain.model.RegisterBody;
-import com.autoparams.common.utils.StringUtils;
+
 import com.autoparams.framework.web.service.SysRegisterService;
 import com.autoparams.system.service.ISysConfigService;
 

@@ -1,6 +1,7 @@
 package com.autoparams.system.domain;
 
-import com.autoparams.common.utils.StringUtils;
+
+import com.autoparams.common.base.utils.StringUtils;
 
 /**
  * 缓存信息

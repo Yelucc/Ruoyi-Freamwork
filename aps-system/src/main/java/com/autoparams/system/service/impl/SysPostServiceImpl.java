@@ -1,11 +1,14 @@
 package com.autoparams.system.service.impl;
 
 import java.util.List;
+
+import com.autoparams.common.base.constant.UserConstants;
+import com.autoparams.common.base.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.autoparams.common.constant.UserConstants;
+
 import com.autoparams.common.exception.ServiceException;
-import com.autoparams.common.utils.StringUtils;
+
 import com.autoparams.system.domain.SysPost;
 import com.autoparams.system.mapper.SysPostMapper;
 import com.autoparams.system.mapper.SysUserPostMapper;

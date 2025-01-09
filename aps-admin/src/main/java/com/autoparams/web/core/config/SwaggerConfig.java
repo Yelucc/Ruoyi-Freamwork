@@ -2,11 +2,13 @@ package com.autoparams.web.core.config;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.autoparams.common.base.config.RuoYiConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.autoparams.common.config.RuoYiConfig;
+
 import io.swagger.annotations.ApiOperation;
 import io.swagger.models.auth.In;
 import springfox.documentation.builders.ApiInfoBuilder;

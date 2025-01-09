@@ -6,10 +6,7 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import com.autoparams.common.annotation.Excel;
-import com.autoparams.common.core.domain.BaseEntity;
+
 
 /**
  * 短链映射对象 sys_url_map

@@ -1,6 +1,7 @@
 package com.autoparams.system.domain.vo;
 
-import com.autoparams.common.utils.StringUtils;
+
+import com.autoparams.common.base.utils.StringUtils;
 
 /**
  * 路由显示信息

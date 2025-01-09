@@ -8,6 +8,10 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
+
+import com.autoparams.common.base.constant.CacheConstants;
+import com.autoparams.common.base.core.domain.AjaxResult;
+import com.autoparams.common.base.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -17,9 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.autoparams.common.constant.CacheConstants;
-import com.autoparams.common.core.domain.AjaxResult;
-import com.autoparams.common.utils.StringUtils;
+
 import com.autoparams.system.domain.SysCache;
 
 /**

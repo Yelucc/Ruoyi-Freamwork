@@ -9,6 +9,9 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.sql.DataSource;
+
+import com.autoparams.common.base.enums.DataSourceType;
+import com.autoparams.common.base.utils.spring.SpringUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -19,8 +22,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.alibaba.druid.spring.boot.autoconfigure.properties.DruidStatProperties;
 import com.alibaba.druid.util.Utils;
-import com.autoparams.common.enums.DataSourceType;
-import com.autoparams.common.utils.spring.SpringUtils;
+
 import com.autoparams.framework.config.properties.DruidProperties;
 import com.autoparams.framework.datasource.DynamicDataSource;
 

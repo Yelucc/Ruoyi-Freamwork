@@ -4,17 +4,19 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.autoparams.common.base.constant.Constants;
+import com.autoparams.common.base.core.domain.AjaxResult;
+import com.autoparams.common.base.core.domain.model.LoginUser;
+import com.autoparams.common.base.utils.MessageUtils;
+import com.autoparams.common.base.utils.ServletUtils;
+import com.autoparams.common.base.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import com.alibaba.fastjson2.JSON;
-import com.autoparams.common.constant.Constants;
-import com.autoparams.common.core.domain.AjaxResult;
-import com.autoparams.common.core.domain.model.LoginUser;
-import com.autoparams.common.utils.MessageUtils;
-import com.autoparams.common.utils.ServletUtils;
-import com.autoparams.common.utils.StringUtils;
+
 import com.autoparams.framework.manager.AsyncManager;
 import com.autoparams.framework.manager.factory.AsyncFactory;
 import com.autoparams.framework.web.service.TokenService;

@@ -1,7 +1,8 @@
 package com.autoparams.system.service.impl;
 
-import com.autoparams.common.utils.DateUtils;
-import com.autoparams.common.utils.sign.Md5Utils;
+
+import com.autoparams.common.base.utils.DateUtils;
+import com.autoparams.common.base.utils.sign.Md5Utils;
 import com.autoparams.system.service.ISysUrlMapService;
 import org.springframework.stereotype.Service;
 import com.autoparams.system.mapper.SysUrlMapMapper;

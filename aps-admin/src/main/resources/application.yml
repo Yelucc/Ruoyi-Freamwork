@@ -111,7 +111,32 @@ minio:
   accessKey: ysdJ57v4wwS9t3A2Rw8l
   secretKey: RtYDDE3fzJi9GP9JE7Nivxi4CfWekpRKWK4ZnzTx
   bucketName: growl
-
+oss:
+  storage:
+    type: MINIO
+    s3:
+      bucketName: your-s3-bucket
+      region: us-west-2
+      accessKey: your-s3-access-key
+      secretKey: your-s3-secret-key
+    minio:
+      bucketName: growl
+      endpoint: http://127.0.0.1:19000
+      accessKey: ysdJ57v4wwS9t3A2Rw8l
+      secretKey: RtYDDE3fzJi9GP9JE7Nivxi4CfWekpRKWK4ZnzTx
+    aliyunOSS:
+      bucketName: your-aliyun-bucket
+      endpoint: oss-cn-hangzhou.aliyuncs.com
+      accessKey: your-aliyun-access-key
+      secretKey: your-aliyun-secret-key
+    qiniuOSS:
+      bucketName: your-qiniu-bucket
+      accessKey: your-qiniu-access-key
+      secretKey: your-qiniu-secret-key
+      domain: your-qiniu-domain
+    # 本地存储相关配置
+    local:
+      storagePath: /path/to/your/local/storage
 # PageHelper分页插件
 pagehelper:
   helperDialect: mysql

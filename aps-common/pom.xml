@@ -11,6 +11,7 @@
     <modules>
         <module>aps-base</module>
         <module>aps-oss</module>
+        <module>aps-liteflow</module>
     </modules>
     <modelVersion>4.0.0</modelVersion>
 

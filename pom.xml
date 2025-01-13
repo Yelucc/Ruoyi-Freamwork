@@ -31,7 +31,7 @@
         <poi.version>4.1.2</poi.version>
         <velocity.version>2.3</velocity.version>
         <jwt.version>0.9.1</jwt.version>
-        <cn.hutool>5.8.30</cn.hutool>
+        <cn.hutool>5.8.35</cn.hutool>
         <io.minio>8.2.1</io.minio>
         <baomidou.mybatis>3.5.9</baomidou.mybatis>
     </properties>

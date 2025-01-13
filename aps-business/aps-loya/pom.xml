@@ -18,5 +18,13 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.autoparams</groupId>
+            <artifactId>autoparams-base</artifactId>
+            <version>3.8.9</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 </project>

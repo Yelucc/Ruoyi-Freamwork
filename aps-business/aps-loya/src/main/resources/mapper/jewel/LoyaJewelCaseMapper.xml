@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.autoparams.business.loya.mapper.LoyaJewelCaseMapper">
+    
+    <resultMap type="LoyaJewel" id="LoyaJewelCaseResult">
+        <result property="jewelId"    column="jewel_id"    />
+        <result property="category"    column="category"    />
+        <result property="imageUrl"    column="image_url"    />
+        <result property="reservationStatus"    column="reservation_status"    />
+        <result property="expectedReturnTime"    column="expected_return_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectLoyaJewelCaseVo">
+        select jewel_id, category, image_url, reservation_status, expected_return_time, create_by, create_time, update_by, update_time from loya_jewel_case
+    </sql>
+
+    <select id="selectLoyaJewelCaseList" parameterType="LoyaJewel" resultMap="LoyaJewelCaseResult">
+        <include refid="selectLoyaJewelCaseVo"/>
+        <where>  
+            <if test="category != null  and category != ''"> and category = #{category}</if>
+            <if test="imageUrl != null  and imageUrl != ''"> and image_url = #{imageUrl}</if>
+            <if test="reservationStatus != null  and reservationStatus != ''"> and reservation_status = #{reservationStatus}</if>
+            <if test="expectedReturnTime != null "> and expected_return_time = #{expectedReturnTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectLoyaJewelCaseByJewelId" parameterType="Long" resultMap="LoyaJewelCaseResult">
+        <include refid="selectLoyaJewelCaseVo"/>
+        where jewel_id = #{jewelId}
+    </select>
+
+    <insert id="insertLoyaJewelCase" parameterType="LoyaJewel" useGeneratedKeys="true" keyProperty="jewelId">
+        insert into loya_jewel_case
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="category != null and category != ''">category,</if>
+            <if test="imageUrl != null and imageUrl != ''">image_url,</if>
+            <if test="reservationStatus != null and reservationStatus != ''">reservation_status,</if>
+            <if test="expectedReturnTime != null">expected_return_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="category != null and category != ''">#{category},</if>
+            <if test="imageUrl != null and imageUrl != ''">#{imageUrl},</if>
+            <if test="reservationStatus != null and reservationStatus != ''">#{reservationStatus},</if>
+            <if test="expectedReturnTime != null">#{expectedReturnTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateLoyaJewelCase" parameterType="LoyaJewel">
+        update loya_jewel_case
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="category != null and category != ''">category = #{category},</if>
+            <if test="imageUrl != null and imageUrl != ''">image_url = #{imageUrl},</if>
+            <if test="reservationStatus != null and reservationStatus != ''">reservation_status = #{reservationStatus},</if>
+            <if test="expectedReturnTime != null">expected_return_time = #{expectedReturnTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where jewel_id = #{jewelId}
+    </update>
+
+    <delete id="deleteLoyaJewelCaseByJewelId" parameterType="Long">
+        delete from loya_jewel_case where jewel_id = #{jewelId}
+    </delete>
+
+    <delete id="deleteLoyaJewelCaseByJewelIds" parameterType="String">
+        delete from loya_jewel_case where jewel_id in 
+        <foreach item="jewelId" collection="array" open="(" separator="," close=")">
+            #{jewelId}
+        </foreach>
+    </delete>
+</mapper>

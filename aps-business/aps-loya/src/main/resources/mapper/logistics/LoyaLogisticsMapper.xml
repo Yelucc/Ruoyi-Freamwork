@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.autoparams.business.loya.mapper.LoyaLogisticsMapper">
+    
+    <resultMap type="LoyaLogistics" id="LoyaLogisticsResult">
+        <result property="trackingNumber"    column="tracking_number"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="jewelIds"    column="jewel_ids"    />
+        <result property="senderName"    column="sender_name"    />
+        <result property="recipientName"    column="recipient_name"    />
+        <result property="senderPhone"    column="sender_phone"    />
+        <result property="recipientPhone"    column="recipient_phone"    />
+        <result property="senderAddress"    column="sender_address"    />
+        <result property="recipientAddress"    column="recipient_address"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectLoyaLogisticsVo">
+        select tracking_number, order_id, jewel_ids, sender_name, recipient_name, sender_phone, recipient_phone, sender_address, recipient_address, create_by, create_time, update_by, update_time from loya_logistics
+    </sql>
+
+    <select id="selectLoyaLogisticsList" parameterType="LoyaLogistics" resultMap="LoyaLogisticsResult">
+        <include refid="selectLoyaLogisticsVo"/>
+        <where>  
+            <if test="orderId != null "> and order_id = #{orderId}</if>
+            <if test="jewelIds != null  and jewelIds != ''"> and jewel_ids = #{jewelIds}</if>
+            <if test="senderName != null  and senderName != ''"> and sender_name like concat('%', #{senderName}, '%')</if>
+            <if test="recipientName != null  and recipientName != ''"> and recipient_name like concat('%', #{recipientName}, '%')</if>
+            <if test="senderPhone != null  and senderPhone != ''"> and sender_phone like concat('%', #{senderPhone}, '%')</if>
+            <if test="recipientPhone != null  and recipientPhone != ''"> and recipient_phone like concat('%', #{recipientPhone}, '%')</if>
+            <if test="senderAddress != null  and senderAddress != ''"> and sender_address like concat('%', #{senderAddress}, '%')</if>
+            <if test="recipientAddress != null  and recipientAddress != ''"> and recipient_address like concat('%', #{recipientAddress}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectLoyaLogisticsByTrackingNumber" parameterType="String" resultMap="LoyaLogisticsResult">
+        <include refid="selectLoyaLogisticsVo"/>
+        where tracking_number = #{trackingNumber}
+    </select>
+
+    <insert id="insertLoyaLogistics" parameterType="LoyaLogistics">
+        insert into loya_logistics
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="trackingNumber != null">tracking_number,</if>
+            <if test="orderId != null">order_id,</if>
+            <if test="jewelIds != null and jewelIds != ''">jewel_ids,</if>
+            <if test="senderName != null and senderName != ''">sender_name,</if>
+            <if test="recipientName != null and recipientName != ''">recipient_name,</if>
+            <if test="senderPhone != null and senderPhone != ''">sender_phone,</if>
+            <if test="recipientPhone != null and recipientPhone != ''">recipient_phone,</if>
+            <if test="senderAddress != null and senderAddress != ''">sender_address,</if>
+            <if test="recipientAddress != null and recipientAddress != ''">recipient_address,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="trackingNumber != null">#{trackingNumber},</if>
+            <if test="orderId != null">#{orderId},</if>
+            <if test="jewelIds != null and jewelIds != ''">#{jewelIds},</if>
+            <if test="senderName != null and senderName != ''">#{senderName},</if>
+            <if test="recipientName != null and recipientName != ''">#{recipientName},</if>
+            <if test="senderPhone != null and senderPhone != ''">#{senderPhone},</if>
+            <if test="recipientPhone != null and recipientPhone != ''">#{recipientPhone},</if>
+            <if test="senderAddress != null and senderAddress != ''">#{senderAddress},</if>
+            <if test="recipientAddress != null and recipientAddress != ''">#{recipientAddress},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateLoyaLogistics" parameterType="LoyaLogistics">
+        update loya_logistics
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderId != null">order_id = #{orderId},</if>
+            <if test="jewelIds != null and jewelIds != ''">jewel_ids = #{jewelIds},</if>
+            <if test="senderName != null and senderName != ''">sender_name = #{senderName},</if>
+            <if test="recipientName != null and recipientName != ''">recipient_name = #{recipientName},</if>
+            <if test="senderPhone != null and senderPhone != ''">sender_phone = #{senderPhone},</if>
+            <if test="recipientPhone != null and recipientPhone != ''">recipient_phone = #{recipientPhone},</if>
+            <if test="senderAddress != null and senderAddress != ''">sender_address = #{senderAddress},</if>
+            <if test="recipientAddress != null and recipientAddress != ''">recipient_address = #{recipientAddress},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where tracking_number = #{trackingNumber}
+    </update>
+
+    <delete id="deleteLoyaLogisticsByTrackingNumber" parameterType="String">
+        delete from loya_logistics where tracking_number = #{trackingNumber}
+    </delete>
+
+    <delete id="deleteLoyaLogisticsByTrackingNumbers" parameterType="String">
+        delete from loya_logistics where tracking_number in 
+        <foreach item="trackingNumber" collection="array" open="(" separator="," close=")">
+            #{trackingNumber}
+        </foreach>
+    </delete>
+</mapper>

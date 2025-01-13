@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.autoparams.business.loya.mapper.LoyaOrderManagementMapper">
+    
+    <resultMap type="LoyaOrder" id="LoyaOrderManagementResult">
+        <result property="orderId"    column="order_id"    />
+        <result property="jewelCode"    column="jewel_code"    />
+        <result property="artistName"    column="artist_name"    />
+        <result property="purpose"    column="purpose"    />
+        <result property="returnPhotoTime"    column="return_photo_time"    />
+        <result property="exposureMethod"    column="exposure_method"    />
+        <result property="deliveryDate"    column="delivery_date"    />
+        <result property="expectedUsageDuration"    column="expected_usage_duration"    />
+        <result property="shipmentTrackingNo"    column="shipment_tracking_no"    />
+        <result property="arrivalDate"    column="arrival_date"    />
+        <result property="returnShipmentTrackingNo"    column="return_shipment_tracking_no"    />
+        <result property="returnDate"    column="return_date"    />
+        <result property="returnPhoto"    column="return_photo"    />
+        <result property="promotionLink"    column="promotion_link"    />
+        <result property="orderStatus"    column="order_status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectLoyaOrderManagementVo">
+        select order_id, jewel_code, artist_name, purpose, return_photo_time, exposure_method, delivery_date, expected_usage_duration, shipment_tracking_no, arrival_date, return_shipment_tracking_no, return_date, return_photo, promotion_link, order_status, create_by, create_time, update_by, update_time from loya_order_management
+    </sql>
+
+    <select id="selectLoyaOrderManagementList" parameterType="LoyaOrder" resultMap="LoyaOrderManagementResult">
+        <include refid="selectLoyaOrderManagementVo"/>
+        <where>  
+            <if test="jewelCode != null  and jewelCode != ''"> and jewel_code = #{jewelCode}</if>
+            <if test="artistName != null  and artistName != ''"> and artist_name like concat('%', #{artistName}, '%')</if>
+            <if test="purpose != null  and purpose != ''"> and purpose = #{purpose}</if>
+            <if test="returnPhotoTime != null "> and return_photo_time = #{returnPhotoTime}</if>
+            <if test="exposureMethod != null  and exposureMethod != ''"> and exposure_method = #{exposureMethod}</if>
+            <if test="deliveryDate != null "> and delivery_date = #{deliveryDate}</if>
+            <if test="expectedUsageDuration != null "> and expected_usage_duration = #{expectedUsageDuration}</if>
+            <if test="shipmentTrackingNo != null  and shipmentTrackingNo != ''"> and shipment_tracking_no = #{shipmentTrackingNo}</if>
+            <if test="arrivalDate != null "> and arrival_date = #{arrivalDate}</if>
+            <if test="returnShipmentTrackingNo != null  and returnShipmentTrackingNo != ''"> and return_shipment_tracking_no = #{returnShipmentTrackingNo}</if>
+            <if test="returnDate != null "> and return_date = #{returnDate}</if>
+            <if test="returnPhoto != null  and returnPhoto != ''"> and return_photo = #{returnPhoto}</if>
+            <if test="promotionLink != null  and promotionLink != ''"> and promotion_link = #{promotionLink}</if>
+            <if test="orderStatus != null  and orderStatus != ''"> and order_status = #{orderStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectLoyaOrderManagementByOrderId" parameterType="Long" resultMap="LoyaOrderManagementResult">
+        <include refid="selectLoyaOrderManagementVo"/>
+        where order_id = #{orderId}
+    </select>
+
+    <insert id="insertLoyaOrderManagement" parameterType="LoyaOrder" useGeneratedKeys="true" keyProperty="orderId">
+        insert into loya_order_management
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="jewelCode != null and jewelCode != ''">jewel_code,</if>
+            <if test="artistName != null and artistName != ''">artist_name,</if>
+            <if test="purpose != null and purpose != ''">purpose,</if>
+            <if test="returnPhotoTime != null">return_photo_time,</if>
+            <if test="exposureMethod != null">exposure_method,</if>
+            <if test="deliveryDate != null">delivery_date,</if>
+            <if test="expectedUsageDuration != null">expected_usage_duration,</if>
+            <if test="shipmentTrackingNo != null">shipment_tracking_no,</if>
+            <if test="arrivalDate != null">arrival_date,</if>
+            <if test="returnShipmentTrackingNo != null">return_shipment_tracking_no,</if>
+            <if test="returnDate != null">return_date,</if>
+            <if test="returnPhoto != null">return_photo,</if>
+            <if test="promotionLink != null">promotion_link,</if>
+            <if test="orderStatus != null and orderStatus != ''">order_status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="jewelCode != null and jewelCode != ''">#{jewelCode},</if>
+            <if test="artistName != null and artistName != ''">#{artistName},</if>
+            <if test="purpose != null and purpose != ''">#{purpose},</if>
+            <if test="returnPhotoTime != null">#{returnPhotoTime},</if>
+            <if test="exposureMethod != null">#{exposureMethod},</if>
+            <if test="deliveryDate != null">#{deliveryDate},</if>
+            <if test="expectedUsageDuration != null">#{expectedUsageDuration},</if>
+            <if test="shipmentTrackingNo != null">#{shipmentTrackingNo},</if>
+            <if test="arrivalDate != null">#{arrivalDate},</if>
+            <if test="returnShipmentTrackingNo != null">#{returnShipmentTrackingNo},</if>
+            <if test="returnDate != null">#{returnDate},</if>
+            <if test="returnPhoto != null">#{returnPhoto},</if>
+            <if test="promotionLink != null">#{promotionLink},</if>
+            <if test="orderStatus != null and orderStatus != ''">#{orderStatus},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateLoyaOrderManagement" parameterType="LoyaOrder">
+        update loya_order_management
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="jewelCode != null and jewelCode != ''">jewel_code = #{jewelCode},</if>
+            <if test="artistName != null and artistName != ''">artist_name = #{artistName},</if>
+            <if test="purpose != null and purpose != ''">purpose = #{purpose},</if>
+            <if test="returnPhotoTime != null">return_photo_time = #{returnPhotoTime},</if>
+            <if test="exposureMethod != null">exposure_method = #{exposureMethod},</if>
+            <if test="deliveryDate != null">delivery_date = #{deliveryDate},</if>
+            <if test="expectedUsageDuration != null">expected_usage_duration = #{expectedUsageDuration},</if>
+            <if test="shipmentTrackingNo != null">shipment_tracking_no = #{shipmentTrackingNo},</if>
+            <if test="arrivalDate != null">arrival_date = #{arrivalDate},</if>
+            <if test="returnShipmentTrackingNo != null">return_shipment_tracking_no = #{returnShipmentTrackingNo},</if>
+            <if test="returnDate != null">return_date = #{returnDate},</if>
+            <if test="returnPhoto != null">return_photo = #{returnPhoto},</if>
+            <if test="promotionLink != null">promotion_link = #{promotionLink},</if>
+            <if test="orderStatus != null and orderStatus != ''">order_status = #{orderStatus},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where order_id = #{orderId}
+    </update>
+
+    <delete id="deleteLoyaOrderManagementByOrderId" parameterType="Long">
+        delete from loya_order_management where order_id = #{orderId}
+    </delete>
+
+    <delete id="deleteLoyaOrderManagementByOrderIds" parameterType="String">
+        delete from loya_order_management where order_id in 
+        <foreach item="orderId" collection="array" open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
+    </delete>
+</mapper>

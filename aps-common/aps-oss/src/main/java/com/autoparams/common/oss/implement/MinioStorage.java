@@ -61,5 +61,6 @@ public class MinioStorage implements ObjectStorageService {
 //        } catch (MinioException e) {
 //            return false;
 //        }
+        return false;
     }
 }

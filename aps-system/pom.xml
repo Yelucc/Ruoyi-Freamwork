@@ -19,11 +19,6 @@
 
         <!-- 通用工具-->
         <dependency>
-            <groupId>com.autoparams</groupId>
-            <artifactId>autoparams-common</artifactId>
-            <version>3.8.9</version>
-        </dependency>
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>

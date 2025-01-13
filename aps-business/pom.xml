@@ -7,6 +7,7 @@
         <groupId>com.autoparams</groupId>
         <artifactId>autoparams</artifactId>
         <version>3.8.9</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>autoparams-business</artifactId>
@@ -25,15 +26,11 @@
     <dependencies>
 
         <!-- 通用工具-->
-        <dependency>
-            <groupId>com.autoparams</groupId>
-            <artifactId>autoparams-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.autoparams</groupId>-->
+<!--            <artifactId>autoparams-loya</artifactId>-->
+<!--            <version>3.8.9</version>-->
+<!--        </dependency>-->
 
     </dependencies>
 

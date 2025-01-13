@@ -60,10 +60,18 @@
         </dependency>
 
         <!-- 业务模块-->
-        <dependency>
-            <groupId>com.autoparams</groupId>
-            <artifactId>autoparams-business</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.autoparams</groupId>-->
+<!--            <artifactId>autoparams-business</artifactId>-->
+<!--            <version>3.8.9</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>com.autoparams</groupId>-->
+<!--            <artifactId>autoparams-loya</artifactId>-->
+<!--            <version>3.8.9</version>-->
+<!--        </dependency>-->
+
 
 
 

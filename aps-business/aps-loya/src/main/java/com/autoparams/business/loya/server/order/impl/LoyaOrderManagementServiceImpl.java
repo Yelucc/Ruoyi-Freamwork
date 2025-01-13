@@ -168,7 +168,7 @@ public class LoyaOrderManagementServiceImpl extends ServiceImpl<LoyaOrderManagem
         List<Long> ids = Arrays.asList(orderIds);
         List<LoyaOrder> loyaOrders = list(Wrappers.lambdaQuery(LoyaOrder.class).in(LoyaOrder::getOrderId, ids));
         loyaOrders.stream().flatMap(item -> Arrays.stream(item.getJewelCode()))
-                .map(Long::valueOf).forEach(id -> caseService.updateJewelStatus(id, LoyaJewel.ReservationStatusEnum.AVAILABLE));
+                .map(Long::valueOf).forEach(id -> caseService.updateJewelStatus(id, AVAILABLE));
         List<LoyaOrder> orders = loyaOrders.stream().peek(item -> item.setOrderStatus(OrderStatus.CLOSE)).collect(Collectors.toList());
         return updateBatchById(orders);
     }

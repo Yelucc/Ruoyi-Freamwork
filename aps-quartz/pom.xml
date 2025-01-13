@@ -30,10 +30,10 @@
         </dependency>
 
         <!-- 通用工具-->
-        <dependency>
-            <groupId>com.autoparams</groupId>
-            <artifactId>autoparams-common</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.autoparams</groupId>-->
+<!--            <artifactId>autoparams-common</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.autoparams</groupId>
             <artifactId>autoparams-base</artifactId>

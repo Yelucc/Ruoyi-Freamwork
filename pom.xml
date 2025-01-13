@@ -232,6 +232,7 @@
         <module>aps-generator</module>
         <module>aps-common</module>
         <module>aps-business</module>
+<!--        <module>aps-business/aps-loya</module>   &lt;!&ndash; 明确列出子模块 &ndash;&gt;-->
     </modules>
     <packaging>pom</packaging>
 

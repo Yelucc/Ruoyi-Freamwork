@@ -19,6 +19,7 @@
     <modules>
         <module>aps-kuihua</module>
         <module>aps-loya</module>
+        <module>aps-mes</module>
     </modules>
 
 

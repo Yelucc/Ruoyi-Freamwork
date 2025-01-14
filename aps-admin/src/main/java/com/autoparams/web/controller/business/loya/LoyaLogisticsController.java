@@ -1,4 +1,4 @@
-package com.autoparams.business.loya.controller;
+package com.autoparams.web.controller.business.loya;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;

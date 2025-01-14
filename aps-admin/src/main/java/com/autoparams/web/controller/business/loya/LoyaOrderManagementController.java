@@ -1,4 +1,4 @@
-package com.autoparams.business.loya.controller;
+package com.autoparams.web.controller.business.loya;
 
 import com.autoparams.business.loya.domain.LoyaJewel;
 import com.autoparams.business.loya.domain.LoyaLogistics;
